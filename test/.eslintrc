@@ -1,0 +1,4 @@
+{
+  "extends": ["jason/mocha"],
+  "parser": "babel-eslint"
+}
