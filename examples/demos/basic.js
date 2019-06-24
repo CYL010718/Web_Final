@@ -14,6 +14,7 @@ const ColoredDateCellWrapper = ({ children }) =>
 
 let Basic = ({ localizer }) => (
   <Calendar
+    popup
     events={events}
     views={allViews}
     step={60}
