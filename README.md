@@ -1,95 +1,68 @@
-# react-big-calendar
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-An events calendar component built for React and made for modern browsers (read: IE10+) and uses flexbox over the classic tables-ception approach.
+## Available Scripts
 
-[**DEMO and Docs**](http://intljusticemission.github.io/react-big-calendar/examples/index.html)
+In the project directory, you can run:
 
-Inspired by [Full Calendar](http://fullcalendar.io/).
+### `npm start`
 
-## Use and Setup
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-`yarn add react-big-calendar` or `npm install --save react-big-calendar`
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-Include `react-big-calendar/lib/css/react-big-calendar.css` for styles, and make sure your calendar's container
-element has a height, or the calendar won't be visible. To provide your own custom styling, see the [Custom Styling](#custom-styling) topic.
+### `npm test`
 
-## Starters
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- [react-big-calendar](https://github.com/arecvlohe/rbc-starter)
-- [react-big-calendar with drag and drop](https://github.com/arecvlohe/rbc-with-dnd-starter)
+### `npm run build`
 
-## Run examples locally
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```sh
-$ git clone git@github.com:intljusticemission/react-big-calendar.git
-$ cd react-big-calendar
-$ yarn
-$ yarn examples
-```
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-- Open [localhost:3000/examples/index.html](http://localhost:3000/examples/index.html).
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### Localization and Date Formatting
+### `npm run eject`
 
-`react-big-calendar` includes two options for handling the date formatting and culture localization, depending
-on your preference of DateTime libraries. You can use either the [Moment.js](http://momentjs.com/) or [Globalize.js](https://github.com/jquery/globalize) localizers.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-Regardless of your choice, you **must** choose a localizer to use this library:
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-#### Moment.js
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-```js
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment'
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-const localizer = momentLocalizer(moment)
+## Learn More
 
-const MyCalendar = props => (
-  <div>
-    <Calendar
-      localizer={localizer}
-      events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
-    />
-  </div>
-)
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-#### Globalize.js v0.1.1
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-```js
-import { Calendar, globalizeLocalizer } from 'react-big-calendar'
-import globalize from 'globalize'
+### Code Splitting
 
-const localizer = globalizeLocalizer(globalize)
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-const MyCalendar = props => (
-  <div>
-    <Calendar
-      localizer={localizer}
-      events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
-    />
-  </div>
-)
-```
+### Analyzing the Bundle Size
 
-## Custom Styling
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-Out of the box you can include the compiled css files and be up and running. But, sometimes, you may want to style
-Big Calendar to match your application styling. For this reason SASS files are included with Big Calendar.
+### Making a Progressive Web App
 
-```
-  @import 'react-big-calendar/lib/sass/styles';
-  @import 'react-big-calendar/addons/dragAndDrop/styles'; // if using DnD
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-SASS implementation provides a `variables` file containing color and sizing variables that you can
-update to fit your application. _Note:_ Changing and/or overriding styles can cause rendering issues with your
-Big Calendar. Carefully test each change accordingly.
+### Advanced Configuration
 
-## Join us on Reactiflux Discord
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-Join us on [Reactiflux Discord](https://discord.gg/uJsgpkC) community under the channel #react-big-calendar if you have any questions.
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
