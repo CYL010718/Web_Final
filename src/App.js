@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import DayBox from './components/day_box';
-import Title from "./components/title";
 import CalTable from "./containers/table";
 import './App.css';
+import events from './events';
+import Toolbar from './containers/toolBar'
 
 class  App extends Component {
   
@@ -12,8 +12,11 @@ class  App extends Component {
     const firstDateofMonth = new Date(currentDate.getFullYear(),currentMonth,1);
     const firstDayofMonth = firstDateofMonth.getDay();
     return (
-      <div className ="App">
-        <CalTable firstDayofMonth = {firstDayofMonth}></CalTable>
+      <div>
+        <div className ="App" style={{width:'60%', height:'100%',padding:'5vh'}}>
+          <CalTable firstDayofMonth = {firstDayofMonth} events = {events}></CalTable>
+        </div>
+        <Toolbar/>
       </div>
     );
   }
