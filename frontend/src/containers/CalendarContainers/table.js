@@ -60,43 +60,6 @@ class CalTable extends Component{
             selectedDate: new Date()
         }
     }
-    handleBack = () => {
-        let newYear = this.state.thisMonth === 0 ? this.state.thisYear-1 : this.state.thisYear;
-        if  (newYear % 4 === 0 && newYear % 400 !== 0) DaysofMonth[1] = 29;
-        let newThisMonth = this.state.thisMonth === 0 ? 11 : this.state.thisMonth -1;
-        let newLastMonth = this.state.lastMonth === 0 ? 11 : this.state.lastMonth-1;
-        let newNextMonth = this.state.nextMonth === 0 ? 11 : this.state.nextMonth-1;
-        this.setState(state => ({
-            thisYear: newYear,
-            thisMonth: newThisMonth,
-            lastMonth: newLastMonth,
-            nextMonth: newNextMonth,
-            firstDay: new Date(newYear,newThisMonth,1).getDay(),
-            lastDay: new Date(newYear,newThisMonth,DaysofMonth[newThisMonth]).getDay(),
-            firstVisibleDate: (DaysofMonth[newLastMonth]-new Date(newYear,newThisMonth,1).getDay()+1) <= DaysofMonth[newLastMonth] ? (DaysofMonth[newLastMonth]-new Date(newYear,newThisMonth,1).getDay()+1) : 1,
-            lastVisibleDate: 6-new Date(newYear, newThisMonth,DaysofMonth[newThisMonth]).getDay(),
-            DayNum: DaysofMonth[newThisMonth]+new Date(newYear,newThisMonth,1).getDay()+6-new Date(newYear, newThisMonth,DaysofMonth[newThisMonth]).getDay()
-        }))
-    }
-
-    handleNext = () => {
-        let newYear = this.state.thisMonth === 11 ? this.state.thisYear+1 : this.state.thisYear;
-        if(newYear % 4 === 0 && newYear % 400 !== 0) DaysofMonth[1] = 29;
-        let newThisMonth = this.state.thisMonth === 11 ? 0 : this.state.thisMonth+1;
-        let newLastMonth = this.state.lastMonth === 11 ? 0 : this.state.lastMonth+1;
-        let newNextMonth = this.state.nextMonth === 11 ? 0 : this.state.nextMonth+1;
-        this.setState(state => ({
-            thisYear: newYear,
-            thisMonth: newThisMonth,
-            lastMonth: newLastMonth, 
-            nextMonth: newNextMonth,
-            firstDay: new Date(newYear,newThisMonth,1).getDay(),
-            lastDay: new Date(newYear,newThisMonth,DaysofMonth[newThisMonth]).getDay(),
-            firstVisibleDate: (DaysofMonth[newLastMonth]-new Date(newYear,newThisMonth,1).getDay()+1) <= DaysofMonth[newLastMonth] ? (DaysofMonth[newLastMonth]-new Date(newYear,newThisMonth,1).getDay()+1) : 1,
-            lastVisibleDate: 6-new Date(newYear, newThisMonth,DaysofMonth[newThisMonth]).getDay(),
-            DayNum: DaysofMonth[newThisMonth]+new Date(newYear,newThisMonth,1).getDay()+6-new Date(newYear, newThisMonth,DaysofMonth[newThisMonth]).getDay()
-        }))
-    }
     handleDateUnitClicked = (date)=>{
       var showDayScheduler = document.getElementById("daySchedulerWrapper");
         showDayScheduler.style.display = 'flex';
@@ -236,7 +199,7 @@ class CalTable extends Component{
         events_displayed.push(
           [
             <div key ={`key1${_k}`} style = {{height:30+'px',width:'100%',position:'relative',pointerEvents:'none'}} />,
-            <div key ={`key2${_k}`} style = {{height:cellHeight+(_k!==0)-30+'px',padding:'2px 0',
+            <div key ={`key2${_k}`} style = {{height:cellHeight-30+'px',padding:'0px 0',
                                               overflowY:'scroll', overflowX:'hidden',width:'100%',
                                               position:'relative', backgroundColor:'lightgrey', opacity:0.3}} >   
               {week_events_displayed}

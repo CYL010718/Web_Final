@@ -24,7 +24,7 @@ class Calendar extends Component {
   render(){
     return (
       <div>
-        <div className ="App" style={{width:'60%', height:'100%',padding:'5vh'}}>
+        <div className ="App" style={{width:'70%', height:'100%',padding:'0vh',display:'flex', justifyContent:'center'}}>
           <Query query = {GROUP_EVENT_QUERY} variables = {{id: this.state.groupID}}>
             {({loading,error,data,subscribeToMore})=>{
                

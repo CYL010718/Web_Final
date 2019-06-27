@@ -12,7 +12,7 @@ var timeIntervalCoverOrNot = (event1, event2) => {
       earlierEvent = event2;
       laterEvent = event1;
     }
-    if ( earlierEvent.end.getTime() >= laterEvent.end.getTime() ) {
+    if ( earlierEvent.end.getTime() >= laterEvent.start.getTime() ) {
       return true;
     }
     else return false;

@@ -26,7 +26,7 @@ class DayScheduler extends React.Component {
       end: new Date(props.selectedDate.getTime()+86400*1000),
     }
     this.state = {
-      timeslots : 60,//
+      timeslots : 30,//
       clockTime : 24,//相乘720
       timeUnitHeight : 5,
       selectedDateEvent : selectedDateEvent,
@@ -113,6 +113,19 @@ class DayScheduler extends React.Component {
     var CheckFunctionGenerator = (event) => {return(
       (x)=>{return timeIntervalCoverOrNot(x,event)}
     )}
+    const mapFunction = (event)=>{
+      return(
+        <div style={{padding:'0.5rem 0px', position:'absolute', top:event.top+'px', left:event.column*component_width+1+'px'}} key={event.id}>
+          <List>
+            <div style={{backgroundColor:'lightgreen', height:event.height+'px',
+                         width:component_width-8+'px', display:'flex', opacity:0.5, 
+                         borderRadius:'10px', overflowX:'scroll',padding:'3px',cursor:'pointer'}}
+                 id = {event.id}
+                 onClick={(e)=>{console.log(e.target.id); this.props.handleEventChange(e.target.id)}}>{event.title}</div>
+          </List>
+        </div>
+      )
+    }
     var _ = require('lodash');
     var events = _.cloneDeep(this.props.events.filter(CheckFunctionGenerator(this.state.selectedDateEvent)))
     var events_groups = [[]];
@@ -145,19 +158,7 @@ class DayScheduler extends React.Component {
       }
       var component_width = 480/events_groups.length;
       if (component_width > 120) component_width = 120;
-      var events_components = events.map((event)=>{
-        return(
-          <div style={{padding:'0.5rem 0px', position:'absolute', top:event.top+'px', left:event.column*component_width+1+'px'}} key={event.id}>
-            <List>
-              <div style={{backgroundColor:'lightgreen', height:event.height-6+'px',
-                           width:component_width-8+'px', display:'flex', opacity:0.5, 
-                           borderRadius:'10px', overflowX:'scroll',padding:'3px',cursor:'pointer'}}
-                   id = {event.id}
-                   onClick={(e)=>{console.log(e.target.id); this.props.handleEventChange(e.target.id)}}>{event.title}</div>
-            </List>
-          </div>
-        )
-      })
+      var events_components = events.map(mapFunction)
     }
     return events_components;
   }

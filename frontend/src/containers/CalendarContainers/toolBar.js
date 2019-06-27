@@ -8,6 +8,7 @@ import Avatar from '../../components/Avatar'
 import { Query, Mutation } from 'react-apollo'
 import {SINGLE_EVENT_QUERY, CURRENT_USER} from '../../graphql/queries'
 import{UPDATE_USER_MUTATION, CREATE_EVENT_MUTATION, UPDATE_EVENT_MUTATION} from '../../graphql/mutations';
+import Group from '../../components/group'
 import user from '../user'
 
 class  Toolbar extends Component {
@@ -101,11 +102,13 @@ class  Toolbar extends Component {
     }
     editProfile = () => {
         var tem = document.getElementById('profile');
-        tem.scrollBy(0,1);
-        if (tem.style.pointerEvents==='none')
+        if (tem.style.pointerEvents==='none'){
             tem.style.pointerEvents = 'auto'
+            tem.scrollBy(0,1);
+        }
         else if (tem.style.pointerEvents==='auto'){
             tem.scrollBy(0,-1000);
+            tem.style.pointerEvents='none';
         }
 
     }
@@ -135,10 +138,7 @@ class  Toolbar extends Component {
                 <div style={{width:'350px', height:'100%', overflowX:'hidden', overflowY:'hidden'}}>
                 <div style={{width:'100%', height:'20%',padding:'5px 5px 0 5px', overflowY:'hidden'}}>
                         <div style={{width:'340px', height:'100%', display:'flex'}}>
-                            <div style={{height:'100%', width:'25%', backgroundColor:'#f3dddf'}}>
-                                <Avatar radius={70} margin={10} name={user.name[0]}/>
-                                <EditIcon editProfile = {this.editProfile}/>
-                            </div>
+                            
                             <Query query = {CURRENT_USER}>
                                 {({loading,data,error,subscribeToMore}) => {
                                     if(loading||!data) return null
@@ -151,13 +151,23 @@ class  Toolbar extends Component {
                                                 console.log(data);
                                                 this.updateUser = updateUser
                                                 return (
-                                                    <div id = 'profile' style={{height:'100%', width:'65%', pointerEvents:'none', backgroundColor:'#f3dddf', overflowY:'scroll'}}>
-                                                        <TextField label='Name' row='1' id='UserName' defaultValue={name} />
-                                                        <TextField label='Email' row='1' id='UserEmail' defaultValue={email} />
-                                                        <div style={{margin:'50px 0 0 0'}}>
-                                                            <Password defaultValue={password}/>
+                                                    <div style={{width:'340px', height:'100%', display:'flex'}}>
+                                                        <div style={{height:'100%', width:'25%', backgroundColor:'#f3dddf'}}>
+                                                            <Avatar radius={70} margin={10} name={name[0]}/>
                                                         </div>
-                                                         <SaveButton value = "save" handleClick = {this.handleSubmit} iscorrect={()=>true}/>
+                                                        <div id = 'profile' style={{height:'100%', width:'65%', pointerEvents:'none', backgroundColor:'#f3dddf', overflowY:'scroll'}}>
+                                                            <TextField label='Name' row='1' id='UserName' defaultValue={name} />
+                                                            <TextField label='Email' row='1' id='UserEmail' defaultValue={email} />
+                                                            <div style={{margin:'50px 0 0 0'}}>
+                                                                <Password defaultValue={password}/>
+                                                            </div>
+                                                            <SaveButton value = "save" handleClick = {this.handleSubmit} iscorrect={()=>true}/>
+                                                        </div>
+                                                        <div style={{height:'100%', width:'10%', backgroundColor:'#f3dddf', position:'relative'}}>
+                                                            <div style={{position:'absolute', top:'0', right:'0'}}>
+                                                                <EditIcon editProfile = {this.editProfile}/>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 )
                                             }}
@@ -165,14 +175,11 @@ class  Toolbar extends Component {
                                     )
                                 }}
                             </Query>
-                            <div style={{height:'100%', width:'10%', backgroundColor:'#f3dddf'}}>
-                                
-                            </div>
                         </div>
                     </div>
                     <div style={{width:'100%', height:'40%',padding:'5px 5px 0 5px', overflowY:'scroll'}}>
                         <div style={{width:'340px', height:'100%', backgroundColor:'#dbe9d0'}}>
-
+                                <Group/>
                         </div>
                     </div>
                     <div style={{width:'100%', height:'40%',padding:'5px 5px 0 5px', overflowY:'scroll'}}>
@@ -191,7 +198,7 @@ class  Toolbar extends Component {
                                                 <TimePicker label='start time' id='StartTime' time={this.state.startTime} settime={this.setNewStartTime}/>
                                                 <TimePicker label='end time' id='EndTime' time={this.state.endTime} settime={this.setNewEndTime}/>
                                             </div>
-                                        <TextField row='3' label='' placeholder='brief explanation' id='Explanation' defaultValue = {body}/>
+                                        <TextField row='7' label='' placeholder='brief explanation' id='Explanation' defaultValue = {body}/>
                                     </div>
                                 )
 

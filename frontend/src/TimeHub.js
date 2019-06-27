@@ -5,9 +5,6 @@ import SignIn from './containers/SignInSystem/Signin';
 import SignUp from './containers/SignInSystem/Signup';
 import Calendar from './containers/Calendar';
 class TimeHub extends Component{
-    constructor(props){
-        super(props)
-    }
     render(){
         return(
             <Switch>

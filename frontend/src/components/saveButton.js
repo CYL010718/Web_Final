@@ -29,12 +29,11 @@ export default function IconLabelButtons(props) {
   var mouseout = () => {
       setcolor({color:'default'})
   }
-  
   return (
     <div style={{display:'flex', flexDirection:'row-reverse'}}>
-      <Button variant="contained" size="small" className={classes.button} 
+        <Button variant="contained" size="small" className={classes.button} 
                 onClick = {props.handleClick} color={color.color} 
-                onMouseOver = {mouseover} onMouseOut = {mouseout}>  
+                onMouseOver = {mouseover} onMouseOut = {mouseout}>
           <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
           {props.value}
         </Button>
