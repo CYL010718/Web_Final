@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import CalTable from "./containers/table";
-import './App.css';
 import events from './events';
 import Toolbar from './containers/toolBar'
 
