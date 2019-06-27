@@ -24,7 +24,7 @@ export default function IconLabelButtons(props) {
 
   return (
     <div style={{display:'flex', flexDirection:'row-reverse'}}>
-        <Button variant="contained" size="small" className={classes.button} onClick = {props.addNewEvent}>
+        <Button variant="contained" size="small" className={classes.button} onClick = {props.handleClick}>
           <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
           Save
         </Button>

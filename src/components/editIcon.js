@@ -1,10 +1,22 @@
-import IconButton from '@material-ui/core/IconButton';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import EditIcon from '@material-ui/icons/Edit';
 
-// ...
+const useStyles = makeStyles(theme => ({
+  fab: {
+    margin: theme.spacing(3),
+  },
+}));
 
-<IconButton aria-label="Delete">
-  <SvgIcon>
-    <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" />
-  </SvgIcon>
-</IconButton>
+export default function FloatingActionButtons(props) {
+  const classes = useStyles();
+
+  return (
+    <div onClick={props.editProfile}>
+      <Fab color="primary" aria-label="Edit" className={classes.fab}>
+        <EditIcon />
+      </Fab>
+    </div>
+  );
+}
