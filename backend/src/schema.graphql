@@ -1,0 +1,83 @@
+
+  type User {
+    id: ID!
+    name: String!
+		email: String!
+    password: String!
+    group(name: String): [Group]
+   # event: [Event] every event create by this user
+  }
+  type Group {
+    id: ID!
+    user(name: String): [User!]
+    manager: User!
+    name: String
+    event(title: String): [Event] #every event in this group
+  }
+  type Event {
+    id: ID!
+    title: String
+		body: String
+    start: String
+    end: String
+    author: User
+  }
+
+	type Token {
+		token: String
+	}
+
+  # the schema allows the following query:
+  type Query {
+    me:User
+    user(email: String!): User # Find Specific user
+		event(id: ID!): Event # Find specific event
+   # events(groupID: ID!): [Event]
+    group(id: ID!): Group # Find specific event
+  }
+
+  # this schema allows the following mutation:
+  type Mutation {
+     deleteUser(id: ID): User!
+     updateUser(data: UpdateUserInput!): User!
+     createEvent(data: CreateEventInput!): Event!
+     deleteEvent(id: ID!): Event!
+     updateEvent(data: UpdateEventInput!): Event!
+     createGroup(data: CreateGroupInput!): Group!
+     quitGroup(id: ID!): Group!
+     deleteGroup(id: ID!): Group!
+     updateGroup(id: ID!, data: UpdateGroupInput!): Group!
+     changeManager(id: ID!): User!
+	   login(email: String! password: String!): Token
+     signup(name: String! email: String! password: String!): User!
+  }
+    input UpdateUserInput {
+      name: String
+      email: String
+      password: String
+    }
+		input CreateEventInput {
+      groupID: ID!
+			title: String!,
+			body: String,
+      start: String!
+      end: String!
+		}
+
+		input UpdateEventInput {
+      eventID: ID!
+			title: String
+			body: String
+      start: String
+      end: String
+    }
+    
+    input CreateGroupInput {
+      name: String!
+    }
+
+    input UpdateGroupInput {
+      name: String
+    }
+
+
