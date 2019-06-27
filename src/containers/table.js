@@ -1,23 +1,16 @@
-import React, {Component, useDebugValue} from "react";
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import React, {Component} from "react";
+import { withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import 'date-fns';
-import IconButton from '@material-ui/core/IconButton';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DayScheduler from './DayScheduler'
 import events from '../events'
-import { element } from "prop-types";
 import timeIntervalCoverOrNot  from '../components/timeIntervalCoverOrNot'
-import { textAlign } from "@material-ui/system";
 import Picker from "../components/Picker"
 
-const Month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov','Dec'];
 let DaysofMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 const cellHeight=100;
 
@@ -69,7 +62,7 @@ class CalTable extends Component{
     }
     handleBack = () => {
         let newYear = this.state.thisMonth === 0 ? this.state.thisYear-1 : this.state.thisYear;
-        if(newYear % 4 === 0 && newYear % 400 !== 0) DaysofMonth[1] = 29;
+        if  (newYear % 4 === 0 && newYear % 400 !== 0) DaysofMonth[1] = 29;
         let newThisMonth = this.state.thisMonth === 0 ? 11 : this.state.thisMonth -1;
         let newLastMonth = this.state.lastMonth === 0 ? 11 : this.state.lastMonth-1;
         let newNextMonth = this.state.nextMonth === 0 ? 11 : this.state.nextMonth-1;
@@ -118,6 +111,7 @@ class CalTable extends Component{
       selectedDate.setHours(0);selectedDate.setMinutes(0);selectedDate.setSeconds(0);selectedDate.setMilliseconds(0);
       let newThisMonth = selectedDate.getMonth();
       let newYear = selectedDate.getFullYear();
+      if  (newYear % 4 === 0 && newYear % 400 !== 0) DaysofMonth[1] = 29;
       let newLastMonth = newThisMonth-1;
       let newNextMonth = newThisMonth+1;
       this.setState(state => ({
@@ -183,7 +177,6 @@ class CalTable extends Component{
         start:selectedMonth_firstDay,
         end:selectedMonth_lastDay
       }
-      var events = _.cloneDeep(this.props.events.filter(CheckFunctionGenerator(selectedMonthEvent)))
       var weeks_events = [];
       var weeksEvent =[];
       for ( var i = 0 ; i < this.state.DayNum/7 ; ++i){
@@ -240,7 +233,6 @@ class CalTable extends Component{
             )
           }
         }
-        var buttonHeight = ((weeks_events_groups[_k].length-1)*22+50)>100?(weeks_events_groups[_k].length-1)*22+50:100;
         events_displayed.push(
           [
             <div key ={`key1${_k}`} style = {{height:30+'px',width:'100%',position:'relative',pointerEvents:'none'}} />,

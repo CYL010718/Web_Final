@@ -4,7 +4,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import IconButton from '@material-ui/core/IconButton';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
   DatePicker,
 } from '@material-ui/pickers';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
