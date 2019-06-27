@@ -1,7 +1,7 @@
 import React from 'react';
 import List from '@material-ui/core/List';
 import BetweenSpace from '../components/BetweenSpace'
-import Pickers from '../components/Picker'
+import Picker from '../components/Picker'
 import timeIntervalCoverOrNot  from '../components/timeIntervalCoverOrNot'
 
 const useStyles = {
@@ -166,7 +166,7 @@ class DayScheduler extends React.Component {
     return (
       <div style={{backgroundColor:'#fff4fb', width:'600px', height:'80vh',borderRadius:'50px', overflowX:'scroll'}}>
         <div style={{padding:'12px 0px', width:'600px', display: 'flex', justifyContent: 'center',color:'grey'}}>
-          <Pickers selectedDate={this.state.selectedDateEvent.start} handleDateChange={this.props.handleDateChange}/>
+          <Picker selectedDate={this.state.selectedDateEvent.start} handleDateChange={this.props.handleDateChange} days='1'/>
         </div>
         <div style={{display: 'flex', justifyContent: 'center', position:'relative'}}>
           <List component="nav" aria-label="Mailbox folders">

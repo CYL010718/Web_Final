@@ -12,7 +12,7 @@ class  App extends Component {
     const firstDayofMonth = firstDateofMonth.getDay();
     return (
       <div>
-        <div className ="App" style={{width:'60%', height:'100%',padding:'5vh'}}>
+        <div className ="App" style={{width:'70%', height:'100%',padding:'0vh',display:'flex', justifyContent:'center'}}>
           <CalTable firstDayofMonth = {firstDayofMonth} events = {events}></CalTable>
         </div>
         <Toolbar/>

@@ -9,25 +9,62 @@ import Password from '../components/password'
 
 class  Toolbar extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            startTime:new Date(),
+            endTime:new Date(),
+        }
+    }
+
+    setNewStartTime = (time) => {
+        this.setState({startTime:time})
+    }
+
+    setNewEndTime = (time) => {
+        this.setState({endTime:time})
+    }
+
     addNewEvent = () =>{
+        if ( !this.isTimeCorrect())return;
         var title = document.getElementById('textFieldTitle').value;
         var body = document.getElementById('textFieldExplanation').value;
-        var start = document.getElementById('timePickerStartTime').value;
-        var end = document.getElementById('timePickerEndTime').value;
+        var start = this.state.startTime;
+        var end = this.state.endTime;
         console.log({title , body, start, end});
+        document.getElementById('textFieldTitle').value='';
+        document.getElementById('textFieldExplanation').value='';
+        this.setState({startTime:new Date(), endTime: new Date()})
     }
 
     editProfile = () => {
-        var tem = document.getElementById('profile').style.pointerEvents;
-        console.log(document.getElementById('profile').style.pointerEvents)
-        document.getElementById('profile').style.pointerEvents = 'auto'
+        var tem = document.getElementById('profile');
+        tem.scrollBy(0,1);
+        if (tem.style.pointerEvents==='none')
+            tem.style.pointerEvents = 'auto'
+        else if (tem.style.pointerEvents==='auto'){
+            tem.scrollBy(0,-1000);
+        }
+
     }
 
     saveProfile = () => {
+        var tem = document.getElementById('profile');
         var name = document.getElementById('textFieldUserName').value;
         var email = document.getElementById('textFieldUserEmail').value;
         var password = document.getElementById('InputUserPassword').value;
         console.log({name,email,password});
+        tem.scrollBy(0,-1000);
+        if (tem.style.pointerEvents==='auto')
+            tem.style.pointerEvents = 'none'
+    }
+
+    isTimeCorrect = () => {
+        var start = this.state.startTime;
+        var end = this.state.endTime;
+        if ( start.getTime()-end.getTime() > 0 )
+           return false;
+        return true;
     }
 
     render(){
@@ -41,7 +78,6 @@ class  Toolbar extends Component {
                         <div style={{width:'340px', height:'100%', display:'flex'}}>
                             <div style={{height:'100%', width:'25%', backgroundColor:'#f3dddf'}}>
                                 <Avatar radius={70} margin={10} name={user.name[0]}/>
-                                <EditIcon editProfile = {this.editProfile}/>
                             </div>
                             <div id = 'profile' style={{height:'100%', width:'65%', pointerEvents:'none', backgroundColor:'#f3dddf', overflowY:'scroll'}}>
                                 <TextField label='Name' row='1' id='UserName' defaultValue={user.name}/>
@@ -49,10 +85,12 @@ class  Toolbar extends Component {
                                 <div style={{margin:'50px 0 0 0'}}>
                                     <Password defaultValue={user.password} />
                                 </div>
-                                <SaveButton handleClick = {this.saveProfile}/>
+                                <SaveButton handleClick = {this.saveProfile} iscorrect={()=>true}/>
                             </div>
-                            <div style={{height:'100%', width:'10%', backgroundColor:'#f3dddf'}}>
-                                
+                            <div style={{height:'100%', width:'10%', backgroundColor:'#f3dddf', position:'relative'}}>
+                                <div style={{position:'absolute', top:'0', right:'0'}}>
+                                    <EditIcon editProfile = {this.editProfile}/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,12 +103,12 @@ class  Toolbar extends Component {
                         <div style={{width:'340px', height:'100%', backgroundColor:'#dfe3e6', display: 'flex', justifyContent: 'space-around', flexDirection:'column'}}> 
                             <TextField row='1' placeholder='Title' id='Title'/>
                             <div style={{display:'flex', justifyContent:'space-around'}}>
-                                <TimePicker label='start time' id='StartTime'/>
-                                <TimePicker label='end time' id='EndTime'/>
+                                <TimePicker label='start time' id='StartTime' time={this.state.startTime} settime={this.setNewStartTime}/>
+                                <TimePicker label='end time' id='EndTime' time={this.state.endTime} settime={this.setNewEndTime}/>
                             </div>
                             <div>
                                 <TextField row='5' label='' placeholder='brief explanation' id='Explanation'/>
-                                <SaveButton handleClick = {this.addNewEvent}/>           
+                                <SaveButton handleClick = {this.addNewEvent} iscorrect={this.isTimeCorrect}/>           
                             </div>
                         </div>
                     </div>

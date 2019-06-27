@@ -5,6 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
+  DatePicker,
 } from '@material-ui/pickers';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -17,8 +18,8 @@ class Pickers extends React.Component {
     const newDate = new Date(dateTime+num*1000*60*60*24);
     this.props.handleDateChange(newDate);
   }
-  handleLeftClick = () => { this.handleClick(-1) }
-  handleRightClick = () => { this.handleClick(1) }
+  handleLeftClick = () => { this.handleClick(-this.props.days) }
+  handleRightClick = () => { this.handleClick(this.props.days) }
   render(){
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -28,15 +29,12 @@ class Pickers extends React.Component {
                         <ChevronLeftIcon fontSize="inherit" />
                     </IconButton>
                 </div>
-                <KeyboardDatePicker
+                <DatePicker
                 margin="normal"
-                id="mui-pickers-date"
                 label=""
                 value={this.props.selectedDate}
                 onChange={this.props.handleDateChange}
-                KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                }}
+                views={this.props.views}
                 />
                 <div style={{color:'inherit',display: 'flex', alignItems: 'center'}}>
                     <IconButton aria-label="ChevronLeftIcon" size="small" color="inherit" onClick={this.handleRightClick}>

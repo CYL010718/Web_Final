@@ -15,6 +15,7 @@ import events from '../events'
 import { element } from "prop-types";
 import timeIntervalCoverOrNot  from '../components/timeIntervalCoverOrNot'
 import { textAlign } from "@material-ui/system";
+import Picker from "../components/Picker"
 
 const Month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov','Dec'];
 let DaysofMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
@@ -276,20 +277,10 @@ class CalTable extends Component{
         }
         
         return (
-          <div style={{position:'relative'}}>
+          <div style={{position:'relative', display:'flex',justifyContent:'center', padding:'5vh'}}>
             <Paper style = {{align: 'center' ,width: '100%',marginTop: 'theme.spacing(3)',overflowX: 'auto',}}>
               <div style = {{display: 'flex', justifyContent: 'space-evenly'}}>
-                <div style={{color:'inherit',display: 'flex', alignItems: 'center'}}>
-                    <IconButton aria-label="ChevronLeftIcon" size="small" color="inherit" onClick={this.handleBack}>
-                      <ChevronLeftIcon fontSize="inherit" />
-                    </IconButton>
-                </div>
-                <h3>{Month[this.state.thisMonth]} {this.state.thisYear}</h3>
-                <div style={{color:'inherit',display: 'flex', alignItems: 'center'}}>
-                  <IconButton aria-label="ChevronRightIcon" size="small" color="inherit" onClick={this.handleNext}>
-                    <ChevronRightIcon fontSize="inherit" />
-                  </IconButton>
-                </div>
+                <Picker selectedDate={this.state.selectedDate} handleDateChange={this.handleDateChange} days={DaysofMonth[this.state.thisMonth]} views={["year", "month"]}/>
               </div>
               <div style={{position:'relative'}}>     
                 <Table style = {{backgroundColor:'rgba(150,0,0,0.1) '}}>
@@ -315,8 +306,8 @@ class CalTable extends Component{
                 </div>  
               </div>
             </Paper>
-            <div id = 'daySchedulerWrapper' style={{position:'fixed', top:'0', left:'0',display: 'none', justifyContent: 'center', width:'100%', height:'100%'}}>
-              <div style={{position:'absolute', width:'100%',height:'100%',backgroundColor:'black', opacity:'0.3'}} onClick={this.handleDaySchedulerClose}/>
+            <div id = 'daySchedulerWrapper' style={{position:'absolute', top:'0', left:'0',display: 'none', justifyContent: 'center', width:'100%' ,height:'100%'}}>
+              <div style={{position:'fixed', width:'100%',height:'100%',backgroundColor:'black', opacity:'0.3'}} onClick={this.handleDaySchedulerClose}/>
               <div style={{position:'absolute', top:'10vh', opacity:'1'}}>
                 <DayScheduler events={events} selectedDate={this.state.selectedDate} handleDateChange={this.handleDateChange}/>
               </div>

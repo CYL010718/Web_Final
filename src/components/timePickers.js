@@ -18,12 +18,13 @@ const useStyles = makeStyles({
 
 export default function MaterialUIPickers(props) {
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState();
+  const [selectedDate, setSelectedDate] = React.useState(props.time);
 
   const classes = useStyles();
 
   function handleDateChange(date) {
     setSelectedDate(date);
+    props.settime(date)
   }
 
   return (
@@ -33,7 +34,7 @@ export default function MaterialUIPickers(props) {
             id={"timePicker"+props.id}
             label={props.label}
             inputVariant="outlined"
-            value={selectedDate}
+            value={props.time}
             onChange={handleDateChange}
         />
       </Grid>
