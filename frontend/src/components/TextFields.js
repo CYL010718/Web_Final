@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function TextFields(props) {
   const classes = useStyles();
-  console.log(props.defaultValue);
   const defaultValue = props.defaultValue
 
   return (

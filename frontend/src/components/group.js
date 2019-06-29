@@ -13,7 +13,7 @@ export default function MaterialTableDemo(props){
       id: group.id,
       name: group.name};
   })
-  console.log(data);
+  
   const [state, setState] = React.useState({
     columns: [
       { title: 'Name', field: 'name' },
@@ -38,7 +38,7 @@ export default function MaterialTableDemo(props){
                             <MaterialTable
                         title="Groups"
                         columns={state.columns}
-                        data={state.data}
+                        data={data}
                         
                         actions={[
                           {
@@ -72,7 +72,7 @@ export default function MaterialTableDemo(props){
                             onRowAdd: newData =>
                             new Promise(resolve => {
                                 resolve();
-                                const data = [...state.data];
+                                //const data = [...state.data];
                                /* data.push(newData);
                                 console.log(newData);*/
               
@@ -81,20 +81,17 @@ export default function MaterialTableDemo(props){
                                     name: newData.name
                                   }
                                 })
-                                setState({ ...state, data });
                                 }),
                             onRowUpdate: (newData, oldData) =>
                             new Promise(resolve => {
                                 resolve();
-                                const data = [...state.data];
-                                data[data.indexOf(oldData)].name = newData.name;
+                                
                                 EditGroupName({
                                   variables:{
                                     id: data[data.indexOf(oldData)].id,
                                     name: newData.name
                                   }
                                 })
-                                setState({ ...state, data });
                                 }),
                             onRowDelete: oldData =>
                             new Promise(resolve => {
@@ -103,15 +100,11 @@ export default function MaterialTableDemo(props){
                                   alert('Cannot delete your default group! Choose another group for default first')
                                 }
                                 else{
-                                  const data = [...state.data];
                                   deleteGroup({
                                     variables:{
                                       id:data[data.indexOf(oldData)].id                             
                                       }
                                   })
-                                  data.splice(data.indexOf(oldData), 1);
-                                  
-                                  setState({ ...state, data });
                                   }
                                 }
                             )

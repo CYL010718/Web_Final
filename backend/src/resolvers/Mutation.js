@@ -146,6 +146,7 @@ const Mutation = {
     pubsub.publish('event', {
       event:{
         mutation: 'CREATED',
+        id: modifiedGroup.id,
         data: newEvent
       }
       
@@ -170,6 +171,7 @@ const Mutation = {
     pubsub.publish('event', {
       event:{
         mutation: 'UPDATED',
+        id: context.id,
         data: modifiedEvent
       }
       
@@ -198,6 +200,7 @@ const Mutation = {
     pubsub.publish('event', {
       event:{
         mutation: 'DELETED',
+        id: groupID,
         data: newEvent
       }
       

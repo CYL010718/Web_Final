@@ -17,6 +17,7 @@ export const CREATE_EVENT_MUTATION = gql`
         end: $end
       }
     ) {
+      id
       title
       body
       start
@@ -37,6 +38,7 @@ export const UPDATE_USER_MUTATION = gql`
         password: $password
       }
     ) {
+      id
       name
       email
       password
@@ -60,6 +62,7 @@ export const UPDATE_EVENT_MUTATION = gql`
         end: $end
       }
     ) {
+      id
       title
       body
       start
@@ -77,6 +80,7 @@ export const DELETE_EVENT_MUTATION = gql`
       eventID: $eventID
       groupID: $groupID
     ) {
+      id
       title
       body
       start

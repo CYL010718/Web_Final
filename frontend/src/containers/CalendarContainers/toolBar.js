@@ -14,7 +14,7 @@ import user from '../user'
 class  Toolbar extends Component {
     constructor(props){
         super(props);
-        
+       
         this.state={
             startTime:new Date(),
             endTime:new Date(),
@@ -64,14 +64,14 @@ class  Toolbar extends Component {
         let end = this.state.endTime
 
         if(!groupID || !title || !start || !end || !this.isTimeCorrect()) return
-        console.log(this.createEvent);
+       
         this.createEvent({
             variables: {
                 groupID: groupID,
                 title: title,
                 body: body,
-                start: start,
-                end: end
+                start: start.toString(),
+                end: end.toString()
             }
         })
 
@@ -93,8 +93,8 @@ class  Toolbar extends Component {
                 eventID:eventID,
                 title: title,
                 body: body,
-                start: start,
-                end: end
+                start: start.toString(),
+                end: end.toString()
             }
         })
 
@@ -113,6 +113,7 @@ class  Toolbar extends Component {
                 groupID: groupID
             }
         })
+        this.setState({startTime:new Date(), endTime: new Date()})
     }
     editProfile = () => {
         var tem = document.getElementById('profile');
@@ -131,9 +132,7 @@ class  Toolbar extends Component {
     isTimeCorrect = () => {
         let start = this.state.startTime;
         let end = this.state.endTime;
-        console.log(start)
-        console.log(end);
-        console.log(new Date());
+        
         if ( start.getTime()-end.getTime() > 0 )
            return false;
         return true;
@@ -147,7 +146,7 @@ class  Toolbar extends Component {
 
 
     render(){
-        console.log(this.props.groups)
+       console.log("render toolbar")
         return (
             <div style={{width:'400px', height:'100%', position:'absolute', right:'0', top:'0',backgroundColor:'#f3e8e7', 
                         display: 'flex', flexDirection: 'row-reverse', justifyContent:'flex-start'}}>
@@ -165,8 +164,7 @@ class  Toolbar extends Component {
                                     let {name,email,password} = data.me
                                     return(
                                         <Mutation mutation = {UPDATE_USER_MUTATION}>
-                                            {(updateUser,{data}) => {
-                                                console.log(data);
+                                            {updateUser => {
                                                 this.updateUser = updateUser
                                                 return (
                                                     <div style={{width:'340px', height:'100%', display:'flex'}}>
@@ -209,7 +207,6 @@ class  Toolbar extends Component {
                             {({loading,data,error,subscribeToMore}) => {
                                 
                                 if(loading||!data) return null;
-                                console.log(data)
                                 if(data.event === null ){
                                   /*  if(this.state.startTime !== this.state.checkTime && this.state.endTime !== this.state.checkTime){
                                         this.setNewStartTime(new Date());
@@ -232,7 +229,7 @@ class  Toolbar extends Component {
                                 let {title,body,start,end} = data.event
                                 start = new Date(Date.parse(start));
                                 end = new Date(Date.parse(end));
-                                if(this.props.eventChange === true){
+                               if(this.props.eventChange === true){
                                     this.props.resetEventChange();
                                     this.setNewStartTime(start);
                                     this.setNewEndTime(end);

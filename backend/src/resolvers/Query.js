@@ -12,11 +12,12 @@ const Query = {
     },
     author: (_, { id }) => find(authors, { id: id }),*/
     //me: (_, args, { userId }) => find(authors, { id: userId }), //from website 
-    user:  (_,args) => {
+    user:  (_,args, {context}) => {
       if(!find(authors, {email: args.email})) throw new Error("Cannot find user")
       return find(authors, {email: args.email});
     },
-    event: (_, args) => {
+    event: (_, args, {context}) => {
+        console.log(args);
         if(args.id === "") return null
         if(!find(events, {id: args.id})) throw new Error("Cannot find event")
        
@@ -28,7 +29,7 @@ const Query = {
       const group = find(groups, {id: args.groupID});
 
     }*/
-    group: (_, args) => {
+    group: (_, args, {context}) => {
       if(!find(groups, {id: args.id})) throw new Error("Cannot find group")
       return find(groups, {id: args.id})
     },

@@ -164,6 +164,7 @@ class DayScheduler extends React.Component {
   }
 
   render(){
+    console.log("render dayscheduler")
     return (
       <div style={{backgroundColor:'#fff4fb', width:'600px', height:'80vh',borderRadius:'50px', overflowX:'scroll'}}>
         <div style={{padding:'12px 0px', width:'600px', display: 'flex', justifyContent: 'center',color:'grey'}}>

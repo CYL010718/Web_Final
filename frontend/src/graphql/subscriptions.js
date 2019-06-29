@@ -5,10 +5,11 @@ export const EVENT_SUBSCRIPTION = gql`
   subscription {
         event{
           mutation
+          id
           data{
             id
             title
-            body
+            body 
             start
             end
           }

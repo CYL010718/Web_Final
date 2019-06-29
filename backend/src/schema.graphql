@@ -12,12 +12,16 @@
     user(name: String): [User!]
     manager: User!
     name: String
-    event(title: String): [Event] #every event in this group
+    event(title: String): [Event]! #every event in this group
   }
+
+  
+
   type Event {
     id: ID!
     title: String
 		body: String
+    group: Group
     start: String
     end: String
     author: User
@@ -44,6 +48,7 @@
 
   type EventSubscriptionPayload{
     mutation:MutationType!
+    id: ID
     data: Event!
   }
 

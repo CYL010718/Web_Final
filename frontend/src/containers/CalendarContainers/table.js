@@ -36,6 +36,8 @@ const StyledTableRow = withStyles(theme => ({
 class CalTable extends Component{
     constructor(props){
         super(props);
+       
+      
         let now = new Date();
         let thisMonth = now.getMonth();
         let thisYear = now.getFullYear();
@@ -63,7 +65,9 @@ class CalTable extends Component{
    
     handleDateUnitClicked = (date)=>{
       var showDayScheduler = document.getElementById("daySchedulerWrapper");
-        showDayScheduler.style.display = 'flex';
+        //showDayScheduler.style.display = 'flex';
+        showDayScheduler.style.opacity=1;
+        showDayScheduler.style.pointerEvents='inherit'
         this.setState({ selectedDate: date})
     }
     handleDaySchedulerClose = () =>{
@@ -216,6 +220,7 @@ class CalTable extends Component{
       )
     }
     render(){
+      console.log("render Table")
         let dayCell = [];
        // let max = DaysofMonth(lastMonth);
         const tem = new Date(this.state.thisYear,this.state.lastMonth,this.state.firstVisibleDate);
@@ -262,7 +267,7 @@ class CalTable extends Component{
                 </div>  
               </div>
             </Paper>
-            <div id = 'daySchedulerWrapper' style={{position:'absolute', top:'0', left:'0',display: 'none', justifyContent: 'center', width:'100%' ,height:'100%'}}>
+            <div id = 'daySchedulerWrapper' style={{position:'absolute', top:'0', left:'0', justifyContent: 'center', width:'100%' ,height:'100%',opacity:'0',display:'flex',pointerEvents:'none'}}>
               <div style={{position:'fixed', width:'100%',height:'100%',backgroundColor:'black', opacity:'0.3'}} onClick={this.handleDaySchedulerClose}/>
               <div style={{position:'absolute', top:'10vh', opacity:'1'}}>
                 <DayScheduler events={this.props.events} handleEventChange = {this.props.handleEventChange} selectedDate={this.state.selectedDate} handleDateChange={this.handleDateChange}/>

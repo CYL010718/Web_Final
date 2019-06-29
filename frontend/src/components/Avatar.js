@@ -4,7 +4,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 
 export default function ImageAvatars(props) {
-    console.log(props.radius)
   const useStyles = makeStyles({
     avatar: {
       margin: props.margin,
