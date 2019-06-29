@@ -36,18 +36,40 @@
     group(id: ID!): Group # Find specific event
   }
 
+  type Subscription{
+    event: EventSubscriptionPayload!
+    group: GroupSubscriptionPayload!
+    user: UserSubscriptionPayload!
+  }
+
+  type EventSubscriptionPayload{
+    mutation:MutationType!
+    data: Event!
+  }
+
+  type GroupSubscriptionPayload{
+    mutation:MutationType!
+    userID: ID
+    data:Group!
+  }
+
+  type UserSubscriptionPayload{
+    mutation: MutationType!
+    data:User!
+  }
   # this schema allows the following mutation:
   type Mutation {
      deleteUser(id: ID): User!
      updateUser(data: UpdateUserInput!): User!
      createEvent(data: CreateEventInput!): Event!
-     deleteEvent(id: ID!): Event!
+     deleteEvent(eventID: ID! groupID: ID!): Event!
      updateEvent(data: UpdateEventInput!): Event!
      createGroup(data: CreateGroupInput!): Group!
      quitGroup(id: ID!): Group!
+     groupAddUser(id: ID! email: String!): User
      deleteGroup(id: ID!): Group!
-     updateGroup(id: ID!, data: UpdateGroupInput!): Group!
-     changeManager(id: ID!): User!
+     editGroupName(data: EditGroupInput!): Group!
+     groupChangeManager(id: ID! email: String!): User!
 	   login(email: String! password: String!): Token
      signup(name: String! email: String! password: String!): User!
   }
@@ -76,8 +98,15 @@
       name: String!
     }
 
-    input UpdateGroupInput {
+    input EditGroupInput {
+      id:ID!
       name: String
     }
+
+  enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
 
 

@@ -1,25 +1,39 @@
 import { gql } from 'apollo-boost'
 
-export const POSTS_SUBSCRIPTION = gql`
+export const EVENT_SUBSCRIPTION = gql`
+
   subscription {
-      post {
-        mutation
-        data {
-          author {
-            name
+        event{
+          mutation
+          data{
             id
-            posts{
-              title
-              body
-              author {
-              name
-            }
-            published
-            }
+            title
+            body
+            start
+            end
           }
-        }
+         
       }
-    
-    
-  }
+    }
+      
 `
+
+export const GROUP_SUBSCRIPTION = gql`
+
+  subscription {
+        group{
+          mutation
+          userID
+          data{
+            id
+            name
+          }
+         
+      }
+    }
+      
+`
+
+
+
+

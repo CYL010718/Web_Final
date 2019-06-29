@@ -22,21 +22,21 @@ const authors = [
 
 const events = [
   { id: "f536ec8e-50fd-4bf9-aab3-38944aaa3acd", 
-    authorId: authors[0].id, 
+    authorID: authors[0].id, 
     title: 'Watch Pornhub',
     body: 'At the dorm.', 
     start: new Date(2019, 5, 13, 0, 0).toString(),
     end: new Date(2019, 5, 13, 2, 0).toString(),
   },
   { id: "798385d0-6654-44a8-81a3-73eb81456ea0", 
-    authorId: authors[0].id, 
+    authorID: authors[0].id, 
     title: 'Eat Breakfast',
     body: '', 
     start: new Date(2019, 5, 8, 6, 0).toString(),
     end: new Date(2019, 5, 8, 7, 0).toString(),
   },
   { id: "da8ca60e-02ce-41e1-9667-e61058f73ba5", 
-    authorId: authors[0].id, 
+    authorID: authors[0].id, 
     title: 'Go Dating',
     body: 'HaHa, a joke', 
     start: new Date(2019, 5, 17, 0, 0).toString(),
@@ -160,7 +160,7 @@ const events = [
       users: ["1a4cbbeb-4ab7-4663-9b98-c996d5007da1","c82d90d7-0e0c-4700-8ece-b90e1c3014e1"],
       events: ["798385d0-6654-44a8-81a3-73eb81456ea0","da8ca60e-02ce-41e1-9667-e61058f73ba5","0","1","4","7","11"],
       name: "Group1", 
-      manager: "1a4cbbeb-4ab7-4663-9b98-c996d5007da1"
+      manager:  "c82d90d7-0e0c-4700-8ece-b90e1c3014e1" 
     },
     { id: '2', 
       password: '123456', 
@@ -174,7 +174,7 @@ const events = [
       users: ["1a4cbbeb-4ab7-4663-9b98-c996d5007da1"], 
       events: ["f536ec8e-50fd-4bf9-aab3-38944aaa3acd","da8ca60e-02ce-41e1-9667-e61058f73ba5"],
       name: 'Group3',
-      manager: "1a4cbbeb-4ab7-4663-9b98-c996d5007da1" 
+      manager: "c82d90d7-0e0c-4700-8ece-b90e1c3014e1" 
     },
   ];
 const db = {

@@ -22,16 +22,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function TextFields(props) {
   const classes = useStyles();
+  console.log(props.defaultValue);
+  const defaultValue = props.defaultValue
 
   return (
-    <form className={classes.container} noValidate autoComplete="off" >
+    <form className={classes.container} noValidate autoComplete="off" key = {props.defaultValue} >
       <TextField
         id={"textField"+props.id}
         label={props.label}
         style={{ margin: 8 }}
         placeholder={props.placeholder}
         multiline
-        defaultValue={props.defaultValue}
+        defaultValue={props.defaultValue || "" }
        // value = {props.value}
         rows={props.row}
         fullWidth

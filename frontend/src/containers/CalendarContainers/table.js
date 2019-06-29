@@ -60,6 +60,7 @@ class CalTable extends Component{
             selectedDate: new Date()
         }
     }
+   
     handleDateUnitClicked = (date)=>{
       var showDayScheduler = document.getElementById("daySchedulerWrapper");
         showDayScheduler.style.display = 'flex';
@@ -192,7 +193,7 @@ class CalTable extends Component{
                            left:100/7*event_left+'%', borderRadius:'10px', fontSize:'15px',
                            overflowX:'auto', textOverflow:'chip',color:'white',cursor:'pointer'}}
                    id = {weeks_events_groups[_k][_j][_i].id}
-                   onClick = {(e)=>{console.log(e.target.id); this.props.handleEventChange(e.target.id)}}>{weeks_events_groups[_k][_j][_i].title}</div>
+                   onClick = {(e)=>{this.props.handleEventChange(e.target.id)}}>{weeks_events_groups[_k][_j][_i].title}</div>
             )
           }
         }

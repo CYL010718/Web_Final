@@ -48,3 +48,16 @@ export const CURRENT_USER = gql`
 `
 
 
+export const GROUP_QUERY = gql`
+  query {
+    me {
+      id
+      group{
+        id
+        name
+      }
+      
+    }
+  }
+`
+

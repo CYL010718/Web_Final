@@ -1,5 +1,5 @@
 const Subscription = {
-  comment: {
+  /*comment: {
     subscribe(parent, { postId }, { db, pubsub }, info) {
       const post = db.posts.find(post => post.id === postId && post.published)
 
@@ -9,10 +9,15 @@ const Subscription = {
 
       return pubsub.asyncIterator(`comment ${postId}`)
     }
-  },
-  post: {
+  },*/
+  group: {
     subscribe(parent, args, { pubsub }, info) {
-      return pubsub.asyncIterator('post')
+      return pubsub.asyncIterator('group')
+    }
+  },
+  event: {
+    subscribe(parent, args, { pubsub }, info) {
+      return pubsub.asyncIterator('event')
     }
   }
 }

@@ -67,3 +67,111 @@ export const UPDATE_EVENT_MUTATION = gql`
     }
   }
 `
+
+export const DELETE_EVENT_MUTATION = gql`
+  mutation deleteEvent(
+    $eventID: ID!
+    $groupID: ID!
+  ) {
+    deleteEvent(
+      eventID: $eventID
+      groupID: $groupID
+    ) {
+      title
+      body
+      start
+      end
+    }
+  }
+`
+
+export const CREATE_GROUP_MUTATION = gql`
+  mutation createGroup(
+    $name: String!
+  ) {
+    createGroup(
+      data: {
+        name: $name
+      }
+    ) {
+      id
+      name
+    }
+  }
+`
+
+export const EDIT_GROUP_NAME_MUTATION = gql`
+  mutation editGroupName(
+    $id: ID!
+    $name: String!
+  ) {
+    editGroupName(
+      data: {
+        id: $id
+        name: $name
+      }
+    ) {
+      id
+      name
+    }
+  }
+`
+
+export const DELETE_GROUP_MUTATION = gql`
+  mutation deleteGroup(
+    $id: ID!
+  ) {
+    deleteGroup(
+        id: $id
+    ) {
+      id
+      name
+    }
+  }
+`
+
+
+export const GROUP_ADDUSER__MUTATION = gql`
+  mutation GroupAddUser(
+    $id: ID!
+    $email: String!
+  ) {
+    GroupAddUser(
+        id: $id
+        email: $email
+    ) {
+      id
+      name
+      email
+  }
+  }
+`
+
+export const GROUP_QUIT_MUTATION = gql`
+  mutation quitGroup(
+    $id: ID!
+  ) {
+    quitGroup(
+        id: $id
+    ) {
+      id
+      name
+  }
+  }
+`
+
+export const CHANGE_MUTATION = gql`
+  mutation groupChangeManager(
+    $id: ID!
+    $email: String!
+  ) {
+    groupChangeManager(
+        id: $id
+        email: $String
+    ) {
+      id
+      name
+      email
+  }
+  }
+`

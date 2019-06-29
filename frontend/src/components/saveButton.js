@@ -23,17 +23,21 @@ export default function IconLabelButtons(props) {
   const classes = useStyles();
   const [color, setcolor] = React.useState({color:'default' });
   var mouseover = () => {
-      var tem = props.iscorrect();
-      if( !tem) setcolor({color:'secondary'})
+      if(props.value!=="delete"){
+        var tem = props.iscorrect();
+        if( !tem) setcolor({color:'secondary'})
+      }
+      
   }
   var mouseout = () => {
       setcolor({color:'default'})
   }
+  
   return (
     <div style={{display:'flex', flexDirection:'row-reverse'}}>
-        <Button variant="contained" size="small" className={classes.button} 
+      <Button variant="contained" size="small" className={classes.button} 
                 onClick = {props.handleClick} color={color.color} 
-                onMouseOver = {mouseover} onMouseOut = {mouseout}>
+                onMouseOver = {mouseover} onMouseOut = {mouseout}>  
           <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
           {props.value}
         </Button>

@@ -17,7 +17,7 @@ const Query = {
       return find(authors, {email: args.email});
     },
     event: (_, args) => {
-        
+        if(args.id === "") return null
         if(!find(events, {id: args.id})) throw new Error("Cannot find event")
        
         return find(events, {id: args.id})
@@ -32,7 +32,8 @@ const Query = {
       if(!find(groups, {id: args.id})) throw new Error("Cannot find group")
       return find(groups, {id: args.id})
     },
-    me: (_, args,  {context} ) => {
+    me: (_, args,  {context,pubsub} ) => {
+    //  console.log(pubsub);
        // console.log("hi!"+args);
         return find(authors, { id: context.id})
       }

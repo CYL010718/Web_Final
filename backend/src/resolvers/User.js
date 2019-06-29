@@ -8,7 +8,7 @@ const User = {
    
    group: (parent,args) => {
      let group = [];
-     console.log(parent);
+   //  console.log(parent);
      if(!args.name){
         group = parent.group.map(id => find(groups, {id: id}));
      }

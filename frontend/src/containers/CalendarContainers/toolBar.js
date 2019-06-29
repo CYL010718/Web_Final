@@ -5,22 +5,25 @@ import SaveButton from '../../components/saveButton'
 import Password from '../../components/password'
 import EditIcon from '../../components/editIcon'
 import Avatar from '../../components/Avatar'
+import Group from '../../components/group'
 import { Query, Mutation } from 'react-apollo'
 import {SINGLE_EVENT_QUERY, CURRENT_USER} from '../../graphql/queries'
-import{UPDATE_USER_MUTATION, CREATE_EVENT_MUTATION, UPDATE_EVENT_MUTATION} from '../../graphql/mutations';
-import Group from '../../components/group'
+import{UPDATE_USER_MUTATION, CREATE_EVENT_MUTATION, UPDATE_EVENT_MUTATION, DELETE_EVENT_MUTATION} from '../../graphql/mutations';
 import user from '../user'
 
 class  Toolbar extends Component {
     constructor(props){
         super(props);
+        
         this.state={
             startTime:new Date(),
             endTime:new Date(),
+            checkTime: new Date()
         }
     }
 
     setNewStartTime = (time) => {
+        console.log(time);
         this.setState({startTime:time})
     }
 
@@ -36,7 +39,6 @@ class  Toolbar extends Component {
         let name = document.getElementById('textFieldUserName').value;
         let email = document.getElementById('textFieldUserEmail').value;
         let password = document.getElementById('InputUserPassword').value;
-        console.log(name);
     
         if (!name && !email && !password) return
     
@@ -62,8 +64,7 @@ class  Toolbar extends Component {
         let end = this.state.endTime
 
         if(!groupID || !title || !start || !end || !this.isTimeCorrect()) return
-        console.log({title , body, start, end});
-
+        console.log(this.createEvent);
         this.createEvent({
             variables: {
                 groupID: groupID,
@@ -86,7 +87,6 @@ class  Toolbar extends Component {
         let end = this.state.endTime
 
         if(!eventID || !title || !start || !end || !this.isTimeCorrect()) return
-        console.log({eventID, title , body, start, end});
 
         this.updateEvent({
             variables: {
@@ -99,6 +99,20 @@ class  Toolbar extends Component {
         })
 
         this.setState({startTime:new Date(), endTime: new Date()})
+    }
+    cancelEvent = e => {
+        e.preventDefault();
+        let eventID = this.props.eventID;
+        let groupID = this.props.groupID;
+
+        if(!eventID || !groupID) return
+
+        this.deleteEvent({
+            variables:{
+                eventID: eventID,
+                groupID: groupID
+            }
+        })
     }
     editProfile = () => {
         var tem = document.getElementById('profile');
@@ -115,8 +129,11 @@ class  Toolbar extends Component {
 
 
     isTimeCorrect = () => {
-        var start = this.state.startTime;
-        var end = this.state.endTime;
+        let start = this.state.startTime;
+        let end = this.state.endTime;
+        console.log(start)
+        console.log(end);
+        console.log(new Date());
         if ( start.getTime()-end.getTime() > 0 )
            return false;
         return true;
@@ -130,6 +147,7 @@ class  Toolbar extends Component {
 
 
     render(){
+        console.log(this.props.groups)
         return (
             <div style={{width:'400px', height:'100%', position:'absolute', right:'0', top:'0',backgroundColor:'#f3e8e7', 
                         display: 'flex', flexDirection: 'row-reverse', justifyContent:'flex-start'}}>
@@ -142,9 +160,9 @@ class  Toolbar extends Component {
                             <Query query = {CURRENT_USER}>
                                 {({loading,data,error,subscribeToMore}) => {
                                     if(loading||!data) return null
+
                                    
                                     let {name,email,password} = data.me
-                                    console.log(password)
                                     return(
                                         <Mutation mutation = {UPDATE_USER_MUTATION}>
                                             {(updateUser,{data}) => {
@@ -152,22 +170,23 @@ class  Toolbar extends Component {
                                                 this.updateUser = updateUser
                                                 return (
                                                     <div style={{width:'340px', height:'100%', display:'flex'}}>
-                                                        <div style={{height:'100%', width:'25%', backgroundColor:'#f3dddf'}}>
-                                                            <Avatar radius={70} margin={10} name={name[0]}/>
+	                                                        <div style={{height:'100%', width:'25%', backgroundColor:'#f3dddf'}}>
+	                                                            <Avatar radius={70} margin={10} name={name[0]}/>
+	                                                        </div>
+	                                                        <div id = 'profile' style={{height:'100%', width:'65%', pointerEvents:'none', backgroundColor:'#f3dddf', overflowY:'scroll'}}>
+	                                                            <TextField label='Name' row='1' id='UserName' defaultValue={name} />
+	                                                            <TextField label='Email' row='1' id='UserEmail' defaultValue={email} />
+	                                                            <div style={{margin:'50px 0 0 0'}}>
+	                                                                <Password defaultValue={password}/>
+	                                                            </div>
+	                                                            <SaveButton value = "save" handleClick = {this.handleSubmit} iscorrect={()=>true}/>
+	                                                        </div>
+	                                                        <div style={{height:'100%', width:'10%', backgroundColor:'#f3dddf', position:'relative'}}>
+	                                                            <div style={{position:'absolute', top:'0', right:'0'}}>
+	                                                                <EditIcon editProfile = {this.editProfile}/>
+	                                                            </div>
                                                         </div>
-                                                        <div id = 'profile' style={{height:'100%', width:'65%', pointerEvents:'none', backgroundColor:'#f3dddf', overflowY:'scroll'}}>
-                                                            <TextField label='Name' row='1' id='UserName' defaultValue={name} />
-                                                            <TextField label='Email' row='1' id='UserEmail' defaultValue={email} />
-                                                            <div style={{margin:'50px 0 0 0'}}>
-                                                                <Password defaultValue={password}/>
-                                                            </div>
-                                                            <SaveButton value = "save" handleClick = {this.handleSubmit} iscorrect={()=>true}/>
-                                                        </div>
-                                                        <div style={{height:'100%', width:'10%', backgroundColor:'#f3dddf', position:'relative'}}>
-                                                            <div style={{position:'absolute', top:'0', right:'0'}}>
-                                                                <EditIcon editProfile = {this.editProfile}/>
-                                                            </div>
-                                                        </div>
+    
                                                     </div>
                                                 )
                                             }}
@@ -175,11 +194,13 @@ class  Toolbar extends Component {
                                     )
                                 }}
                             </Query>
+                       
                         </div>
                     </div>
+                    
                     <div style={{width:'100%', height:'40%',padding:'5px 5px 0 5px', overflowY:'scroll'}}>
                         <div style={{width:'340px', height:'100%', backgroundColor:'#dbe9d0'}}>
-                                <Group/>
+                            <Group defaultGroup = {this.props.defaultGroup} groups = {this.props.groups} handleGroupChange = {this.props.handleGroupChange} handleDefaultGroupChange = {this.props.handleDefaultGroupChange}/>
                         </div>
                     </div>
                     <div style={{width:'100%', height:'40%',padding:'5px 5px 0 5px', overflowY:'scroll'}}>
@@ -188,15 +209,42 @@ class  Toolbar extends Component {
                             {({loading,data,error,subscribeToMore}) => {
                                 
                                 if(loading||!data) return null;
-                                
+                                console.log(data)
+                                if(data.event === null ){
+                                  /*  if(this.state.startTime !== this.state.checkTime && this.state.endTime !== this.state.checkTime){
+                                        this.setNewStartTime(new Date());
+                                        this.setNewEndTime(new Date());
+                                        this.setState({
+                                            checkTime: new Date()
+                                        })
+                                    }*/
+                                    return(
+                                    <div>
+                                        <TextField row='1' placeholder='Title' id='Title' defaultValue = {""}/>
+                                            <div style={{display:'flex', justifyContent:'space-around'}}>
+                                                <TimePicker label='start time' id='StartTime'  time = {this.state.startTime} settime={this.setNewStartTime}/>
+                                                <TimePicker label='end time' id='EndTime' time = {this.state.endTime} settime={this.setNewEndTime}/>
+                                            </div>
+                                        <TextField row='7' label='' placeholder='brief explanation' id='Explanation' defaultValue = {""}/>
+                                    </div>
+                                )}
+
                                 let {title,body,start,end} = data.event
-                                console.log(data.event)
+                                start = new Date(Date.parse(start));
+                                end = new Date(Date.parse(end));
+                                if(this.props.eventChange === true){
+                                    this.props.resetEventChange();
+                                    this.setNewStartTime(start);
+                                    this.setNewEndTime(end);
+                                }
+                                
+                                console.log(start)
                                 return(
                                     <div>
                                         <TextField row='1' placeholder='Title' id='Title' defaultValue = {title}/>
                                             <div style={{display:'flex', justifyContent:'space-around'}}>
-                                                <TimePicker label='start time' id='StartTime' time={this.state.startTime} settime={this.setNewStartTime}/>
-                                                <TimePicker label='end time' id='EndTime' time={this.state.endTime} settime={this.setNewEndTime}/>
+                                                <TimePicker label='start time' id='StartTime'  time = {this.state.startTime} settime={this.setNewStartTime}/>
+                                                <TimePicker label='end time' id='EndTime' time = {this.state.endTime} settime={this.setNewEndTime}/>
                                             </div>
                                         <TextField row='7' label='' placeholder='brief explanation' id='Explanation' defaultValue = {body}/>
                                     </div>
@@ -214,8 +262,14 @@ class  Toolbar extends Component {
                                     <Mutation mutation = {CREATE_EVENT_MUTATION}>
                                         {createEvent => {
                                             this.createEvent = createEvent;
+                                            return  <SaveButton value = "create" handleClick = {this.addNewEvent} iscorrect={this.isTimeCorrect}/>
+                                        }}
+                                    </Mutation>
+                                    <Mutation mutation = {DELETE_EVENT_MUTATION}>
+                                        {deleteEvent => {
+                                            this.deleteEvent = deleteEvent;
                                             return(
-                                                <SaveButton value = "create" handleClick = {this.addNewEvent} iscorrect={this.isTimeCorrect}/>
+                                                <SaveButton value = "delete" handleClick = {this.cancelEvent} />
                                             )
                                         }}
                                     </Mutation>
