@@ -14,7 +14,7 @@
 p.s. <br/>
 frontend 使用 port:3000 <br/>
 backend 使用port:4000
-install中有機會會有warning，可以先忽略他...
+frontend install中有機會會有warning，可以先忽略他...
 
 ## 其他說明
 
