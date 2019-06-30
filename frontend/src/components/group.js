@@ -42,12 +42,6 @@ export default function MaterialTableDemo(props){
                         
                         actions={[
                           {
-                            icon: 'add',
-                            iconProps:{fontSize:'14px'},
-                            tooltip: 'add user',
-                            onClick: (event, rowData) => alert('add user')
-                          },
-                          {
                             icon: 'subdirectory_arrow_left',
                             tooltip: 'quit group',
                             onClick: (event, rowData) => {
@@ -63,8 +57,13 @@ export default function MaterialTableDemo(props){
                             }
                           },
                           {
-                            icon: 'add',
+                            icon: 'calendar_today',
                             tooltip: 'show calendar',
+                            onClick: (event, rowData)  => props.handleGroupChange(rowData.id)
+                          },
+                          {
+                            icon: 'star',
+                            tooltip: 'set defaultGroup',
                             onClick: (event, rowData)  => props.handleGroupChange(rowData.id)
                           }
                         ]}

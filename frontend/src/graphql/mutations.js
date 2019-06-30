@@ -136,11 +136,11 @@ export const DELETE_GROUP_MUTATION = gql`
 
 
 export const GROUP_ADDUSER__MUTATION = gql`
-  mutation GroupAddUser(
+  mutation groupAddUser(
     $id: ID!
     $email: String!
   ) {
-    GroupAddUser(
+    groupAddUser(
         id: $id
         email: $email
     ) {
@@ -167,11 +167,11 @@ export const GROUP_QUIT_MUTATION = gql`
 export const CHANGE_MUTATION = gql`
   mutation groupChangeManager(
     $id: ID!
-    $email: String!
+    $userID: ID!
   ) {
     groupChangeManager(
         id: $id
-        email: $String
+        userID: $userID
     ) {
       id
       name

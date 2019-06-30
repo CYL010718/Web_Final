@@ -1,41 +1,54 @@
 import { find, filter, findIndex } from 'lodash';
 import db from "../db";
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+const authorModel = require('../models/authorModel')
+const eventModel = require('../models/eventModel')
+const groupModel = require('../models/groupModel')
 const authors = db.authors;
 const events = db.events;
 const groups = db.groups;
 
 const Group = {
-   manager: (parent ,arg) => {
-       return (find(authors, {id: parent.manager}))
+    manager: (parent ,arg) => {
+       //return (find(authors, {id: parent.manager}))
+       return authorModel.findOne({id: parent.manager}).then(
+           result => {return result}
+       )
     },
 
     user: (parent,arg) => {
         let users = [];
         if(!arg.name)  {
-            users = parent.users.map(id => find(authors, {id: id}));
+            return parent.users.map(id => {
+                return authorModel.findOne({id: id}).then(
+                    result => {return result}
+                )
+            });
         }
         else{ 
-            if(!find(authors, {name: arg.name})) throw new Error('Cannot find user')
-            let userId = find(authors, {name: arg.name}).id;
-            if (!parent.users.find(id => id === userId)) throw new Error('User not in this group')
-            users.push(find(authors, {name: arg.name})) 
-              
+            //if(!find(authors, {name: arg.name})) throw new Error('Cannot find user')
+            //let userId = find(authors, {name: arg.name}).id;
+            return authorModel.findOne({email:arg.email}).then(result=>{
+                if(!result)throw new Error('Cannot find user')
+                else{
+                    if (!parent.users.find(id => id === result.id)) throw new Error('User not in this group')
+                    console.log([result])
+                    return [result]
+                }
+            })
+            //users.push(find(authors, {name: arg.name})) 
         } 
-        return users   
     },
     event: (parent, arg) => {
         
         let event = [];
         if(!arg.title)  {
-            event = parent.events.map(id => find(events, {id: id}));
+            //event = parent.events.map(id => find(events, {id: id}));
+            return parent.events.map(id => eventModel.findOne({id:id}).then(
+                result => {return result}
+            ));
         }
-        else{ 
-            if(!find(events, {title: arg.title})) throw new Error('Cannot find event')
-            let eventId = find(events, {title: arg.title}).id;
-            if (!parent.events.find(id => id === eventId)) throw new Error('Event not in this group')
-            event.push(find(events, {title: arg.title}))   
-        } 
-        return event 
     }
    /*event: (author) => filter(events, { authorId: author.id }),
    group: (author) => filter(groups, { authorId: author.id }),*/

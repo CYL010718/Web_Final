@@ -18,7 +18,8 @@ class  Toolbar extends Component {
         this.state={
             startTime:new Date(),
             endTime:new Date(),
-            checkTime: new Date()
+            checkTime: new Date(),
+            profile:{},
         }
     }
 
@@ -175,7 +176,7 @@ class  Toolbar extends Component {
 	                                                            <TextField label='Name' row='1' id='UserName' defaultValue={name} />
 	                                                            <TextField label='Email' row='1' id='UserEmail' defaultValue={email} />
 	                                                            <div style={{margin:'50px 0 0 0'}}>
-	                                                                <Password defaultValue={password}/>
+	                                                                <Password defaultValue={password} id='UserPassword'/>
 	                                                            </div>
 	                                                            <SaveButton value = "save" handleClick = {this.handleSubmit} iscorrect={()=>true}/>
 	                                                        </div>

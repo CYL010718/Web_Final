@@ -60,4 +60,30 @@ export const GROUP_QUERY = gql`
     }
   }
 `
+export const GROUP_USER_QUERY = gql`
+    query group(
+      $id: ID!
+    ){
+      group(id: $id){
+        id
+        user{
+          id
+          email
+        }
+    }
+    }
+    `
 
+export const GROUP_MANAGER_QUERY = gql`
+    query group(
+      $id: ID!
+    ){
+      group(id: $id){
+        id
+        manager{
+          id
+          name
+        }
+    }
+    }
+    `

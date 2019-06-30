@@ -1,5 +1,10 @@
 import { find, filter, findIndex } from 'lodash';
 import db from "../db";
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+const authorModel = require('../models/authorModel')
+const eventModel = require('../models/eventModel')
+const groupModel = require('../models/groupModel')
 const authors = db.authors;
 const events = db.events;
 const groups = db.groups;
@@ -7,20 +12,27 @@ const groups = db.groups;
 const User = {
    
    group: (parent,args) => {
-     let group = [];
-   //  console.log(parent);
+     //console.log(parent);
      if(!args.name){
-        group = parent.group.map(id => find(groups, {id: id}));
+        return (parent.group.map(id => {
+           return groupModel.findOne({id:id}).then(result=>{
+               if ( !result ) console.log('no such group1')
+               else { //console.log(result)
+                  return result
+               }
+           })
+        }));
      }
      else {
-        if(!find(groups, {name: args.name})) throw new Error('Cannot find group')
-        let groupId = find(groups, {name:args.name}).id;
-        if (!parent.group.find(id => id === groupId)) throw new Error('User not in this group')
-        group.push(find(groups, {name: args.name})) 
-
+        //if(!find(groups, {name: args.name})) throw new Error('Cannot find group')
+        return groupModel.findOne({name: args.name}).then(result =>{
+           if ( !result ) console.log('no such group2')
+           else {
+              if (!parent.group.find(id => id === groupId)) throw new Error('User not in this group')
+              return result;
+           }
+        })
      }
-    
-     return group
    }
 }
 

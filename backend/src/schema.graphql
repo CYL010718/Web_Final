@@ -74,7 +74,7 @@
      groupAddUser(id: ID! email: String!): User
      deleteGroup(id: ID!): Group!
      editGroupName(data: EditGroupInput!): Group!
-     groupChangeManager(id: ID! email: String!): User!
+     groupChangeManager(id: ID! userID: ID!): User!
 	   login(email: String! password: String!): Token
      signup(name: String! email: String! password: String!): User!
   }

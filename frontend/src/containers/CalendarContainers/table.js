@@ -10,6 +10,10 @@ import DayScheduler from './DayScheduler'
 //import events from '../events'
 import timeIntervalCoverOrNot  from '../../components/timeIntervalCoverOrNot'
 import Picker from "../../components/Picker"
+import AddUsers from "../../components/addUsers"
+import Manager from '../../components/manager'
+import { Query, Mutation } from 'react-apollo'
+import {GROUP_USER_QUERY, GROUP_MANAGER_QUERY} from '../../graphql/queries'
 
 let DaysofMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
 const cellHeight=100;
@@ -72,7 +76,8 @@ class CalTable extends Component{
     }
     handleDaySchedulerClose = () =>{
       var showDayScheduler = document.getElementById("daySchedulerWrapper");
-      showDayScheduler.style.display = 'none';
+      showDayScheduler.style.opacity=0;
+        showDayScheduler.style.pointerEvents='none'
     }
     handleDateChange = (date) => {
       var selectedDate = new Date(date.getTime());
@@ -267,6 +272,33 @@ class CalTable extends Component{
                 </div>  
               </div>
             </Paper>
+            <div style={{position:'fixed',top:'0',right:'400px',margin:'10px'}}>
+            <Query query = {GROUP_USER_QUERY} variables = {{id:this.props.groupID}}>
+            
+              {({loading,error,data,subscribeToMore}) => {
+                console.log(this.props.groupID)
+                if(loading) return null;
+                if(error) console.log("error")
+                let users = data.group.user
+                
+                return(
+                  <Query query = {GROUP_MANAGER_QUERY} variables = {{id:this.props.groupID}}> 
+                  {({loading,data,error,subscribeToMore})=>{
+                    if(loading) return null;
+                    if(error) console.log("error")
+                    console.log(data)
+                    let manager = data.group.manager;
+                    return  <Manager groupID = {this.props.groupID} manager={manager} users={users}/>
+                  }}         
+                   
+                  </Query>
+                )}}
+              
+             </Query>
+             <div style={{}}>
+                <AddUsers groupID = {this.props.groupID}/>
+             </div>
+            </div>
             <div id = 'daySchedulerWrapper' style={{position:'absolute', top:'0', left:'0', justifyContent: 'center', width:'100%' ,height:'100%',opacity:'0',display:'flex',pointerEvents:'none'}}>
               <div style={{position:'fixed', width:'100%',height:'100%',backgroundColor:'black', opacity:'0.3'}} onClick={this.handleDaySchedulerClose}/>
               <div style={{position:'absolute', top:'10vh', opacity:'1'}}>

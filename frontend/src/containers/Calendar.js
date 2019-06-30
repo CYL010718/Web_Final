@@ -42,7 +42,7 @@ class Calendar extends Component {
             {({loading,error,data,subscribeToMore})=>{      
                if(loading) return null
                if(error) console.log("error");
-          
+              console.log(data)
 
                if(!eventUnsubscribe){
                
@@ -98,7 +98,7 @@ class Calendar extends Component {
                console.log(data)
                console.log(events);
                //return <div>{table}</div>
-              return  <CalTable  handleEventChange = {this.handleEventChange} events = {events}></CalTable>
+              return  <CalTable groupID = {this.state.groupID}  handleEventChange = {this.handleEventChange} events = {events}></CalTable>
   
             }}
           </Query>
