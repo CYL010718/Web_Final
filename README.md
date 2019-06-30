@@ -14,7 +14,7 @@
 p.s. <br/>
 frontend 使用 port:3000 <br/>
 backend 使用port:4000
-frontend install中有機會會有warning，可以先忽略他...
+frontend npm install中有機會會有warning，可以先忽略他...
 
 ## 其他說明
 
@@ -86,7 +86,8 @@ https://github.com/onursimsek94/react-big-calendar
 > 黃彥翔 : <br>
 > 前端React製作（calendar部分全部手刻......),<br/>
 > MongoDB schema設計<br>
-> GraphQL 和 db 連接
+> GraphQL 和 db 連接<br>
+
 
 > 陳彥霖 : <br>
 > GraphQL schema和resolver設計<br>
