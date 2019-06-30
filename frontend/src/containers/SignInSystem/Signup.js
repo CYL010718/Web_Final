@@ -61,7 +61,7 @@ class SignUp extends Component{
           return (
             <div style = {{display: 'flex', justifyContent: 'space-around', alignItems: 'center',height:'100%'}}>
             <div style = {{height:'100%', width: '50%',backgroundColor: 'black', display:'flex',alignItems: 'center'}}>
-                <img src = {require(`../../img/pornhubLogo.jpeg`)} style = {{width:'100%'}}  alt="tem2"/>
+                <img src = {require(`../../img/time-stone.jpg`)} style = {{width:'100%'}}  alt="tem2"/>
             </div>
             {this.state.Redirect}
             <Container component="main" maxWidth="xs">
