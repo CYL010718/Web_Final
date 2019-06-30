@@ -59,9 +59,7 @@ const Query = {
       .catch(err => console.error(`Cannot find group2`))
     },
     me: (_, args,  {context,pubsub} ) => {
-      const query = { id: context.id};
-
-      return authorModel.findOne(query)
+      return authorModel.findOne({ id: context.id})
         .then(result => {
           if(result) {
             ////console.log(`Successfully found me: ${result}.`)

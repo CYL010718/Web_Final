@@ -16,22 +16,24 @@ class TimeHub extends Component{
 
     render(){
         return(
-            <Query query = {USER_DEFAULT_GROUP}>
+
+            <Switch>
+                <Route exact path = '/' component = {SignIn}/>
+                <Route path = '/SignUp' component = {SignUp}/>
+                <Query query = {USER_DEFAULT_GROUP}>
                 {({loading,data,error}) => {
                     if(loading) return null
                     if(error) console.log("error")
                     console.log(data)
                     let defaultGroup = data.me.defaultGroup.id;
                     return(
-                        <Switch>
-                            <Route exact path = '/' component = {SignIn}/>
-                            <Route path = '/SignUp' component = {SignUp}/>
                             <Route path = '/main' render = {() => <Calendar defaultGroup ={defaultGroup} handleDefaultGroupChange = {this.handleDefaultGroupChange}/>}/>
-                        </Switch> 
-                    )
-                }}
-
-            </Query>
+                            )
+                        }}
+        
+                    </Query>
+            </Switch> 
+              
             
            
         )

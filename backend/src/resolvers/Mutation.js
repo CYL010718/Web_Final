@@ -23,6 +23,7 @@ const Mutation = {
   groupAddUser: (_, {id,email}, {context, pubsub}) => {
     
     var GroupUsers = [];
+    var newUserGroups = []
     return groupModel.findOne({id:id}).then(result=>{
       if(!result) throw new Error('Cannot find group');
       else if(result.manager !== context.id) throw new Error('Access denied! Only the manager of the group can add new users');
@@ -34,8 +35,13 @@ const Mutation = {
             if ( GroupUsers.some(e=>{return e===result.id})) throw new Error('User already in group');
             else{
               GroupUsers.push(result.id)
+              newUserGroups = result.group;
+              newUserGroups.push(id)
               groupModel.findOneAndUpdate({id:id},{$set:{users:GroupUsers}}).then(result=>{
                 if(!result) throw new Error('Cannot find group');
+              })
+              authorModel.findOneAndUpdate({email:email},{$set:{group:newUserGroups}}).then(result=>{
+                if(!result) throw new Error('Cannot find user');
               })
               return result
             }

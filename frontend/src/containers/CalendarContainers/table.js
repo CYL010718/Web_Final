@@ -304,7 +304,7 @@ class CalTable extends Component{
              </div>
             </div>
             <div id = 'daySchedulerWrapper' style={{position:'absolute', top:'0', left:'0', justifyContent: 'center', width:'100%' ,height:'100%',opacity:'0',display:'flex',pointerEvents:'none'}}>
-              <div style={{position:'fixed', width:'100%',height:'100%',backgroundColor:'black', opacity:'0.3'}} onClick={this.handleDaySchedulerClose}/>
+              <div style={{position:'fixed', left:'0', width:'200%',height:'100%',backgroundColor:'black', opacity:'0.3'}} onClick={this.handleDaySchedulerClose}/>
               <div style={{position:'absolute', top:'10vh', opacity:'1'}}>
                 <DayScheduler events={this.props.events} handleEventChange = {this.props.handleEventChange} selectedDate={this.state.selectedDate} handleDateChange={this.handleDateChange}/>
               </div>
