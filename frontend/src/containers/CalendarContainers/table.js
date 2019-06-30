@@ -12,6 +12,7 @@ import timeIntervalCoverOrNot  from '../../components/timeIntervalCoverOrNot'
 import Picker from "../../components/Picker"
 import AddUsers from "../../components/addUsers"
 import Manager from '../../components/manager'
+import DefaultGroupBulb from "../../components/defaultGroupBulb"
 import { Query, Mutation } from 'react-apollo'
 import {GROUP_USER_QUERY, GROUP_MANAGER_QUERY} from '../../graphql/queries'
 
@@ -244,6 +245,9 @@ class CalTable extends Component{
         
         return (
           <div style={{position:'relative', display:'flex',justifyContent:'center', padding:'5vh'}}>
+          <div style={{position:'absolute',right:'6vh',top:'6vh'}}>
+            <DefaultGroupBulb groupID={this.props.groupID} defaultGroupID={this.props.defaultGroupID}/>
+          </div>
             <Paper style = {{align: 'center' ,width: '100%',marginTop: 'theme.spacing(3)',overflowX: 'auto',}}>
               <div style = {{display: 'flex', justifyContent: 'space-evenly'}}>
                 <Picker selectedDate={this.state.selectedDate} handleDateChange={this.handleDateChange} days={DaysofMonth[this.state.thisMonth]} views={["year", "month"]}/>

@@ -21,6 +21,9 @@ const authorSchema = new Schema({
 	},
 	group: {
 		type: Array,
+	},
+	defaultGroup: {
+		type: String
 	}
 })
 

@@ -41,11 +41,12 @@ _db.once('open', () => {
       if(request){
         const token = request.headers.authorization;
         ////console.log(request)
-        if(token){
-          
+        //console.log(typeof(token))
+        //if ( token==='null' )console.log('token null')
+        if(token !== 'null'){
+          //console.log(token)
           const user = jwt.verify(token,SECRET);
           memory_token = token;
-        // //console.log(user);
           return {
           context:user,
           pubsub: pubsub
@@ -54,7 +55,7 @@ _db.once('open', () => {
             iat: 1561561022 }*/
           }
         }
-        else throw new Error('Please log in first')
+        //else throw new Error('Please log in first')
       }
       else{
       // //console.log(memory_token)

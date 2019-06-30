@@ -3,7 +3,7 @@ import CalTable from "./CalendarContainers/table";
 //import './App.css';
 //import events from './events';
 import Toolbar from './CalendarContainers/toolBar'
-import { Query, Mutation } from 'react-apollo'
+import { Query } from 'react-apollo'
 import {GROUP_EVENT_QUERY, GROUP_QUERY} from '../graphql/queries'
 import {EVENT_SUBSCRIPTION, GROUP_SUBSCRIPTION} from '../graphql/subscriptions'
 
@@ -13,10 +13,16 @@ class Calendar extends Component {
   constructor(props){
     super(props)
     this.state ={
-      groupID: "1",
+      defaultGroupID: props.defaultGroup,
+      groupID: props.defaultGroup,
       eventID: "",
       eventChange: false
     }
+  }
+  handleDefaultGroupChange = defaultGroupID => {
+    this.setState(state => ({
+      defaultGroupID: defaultGroupID
+    }))
   }
   handleGroupChange = groupID =>{
     this.setState(state => ({
@@ -98,7 +104,7 @@ class Calendar extends Component {
                console.log(data)
                console.log(events);
                //return <div>{table}</div>
-              return  <CalTable groupID = {this.state.groupID}  handleEventChange = {this.handleEventChange} events = {events}></CalTable>
+              return  <CalTable defaultGroupID = {this.state.defaultGroupID} groupID = {this.state.groupID}  handleEventChange = {this.handleEventChange} events = {events}></CalTable>
   
             }}
           </Query>
@@ -161,7 +167,7 @@ class Calendar extends Component {
                  }})
             }
             console.log(groups);
-            return <Toolbar  defaultGroup = {this.props.defaultGroup}  groups = {groups} handleGroupChange =  {this.handleGroupChange}  handleDefaultGroupChange = {this.props.handleDefaultGroupChange} eventChange = {this.state.eventChange} groupID = {this.state.groupID} eventID = {this.state.eventID} resetEventChange = {this.resetEventChange}/>;
+            return <Toolbar  defaultGroup = {this.props.defaultGroup}  groups = {groups} handleGroupChange =  {this.handleGroupChange}  handleDefaultGroupChange = {this.handleDefaultGroupChange} eventChange = {this.state.eventChange} groupID = {this.state.groupID} eventID = {this.state.eventID} resetEventChange = {this.resetEventChange}/>;
           }}
 
         </Query>

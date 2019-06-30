@@ -20,19 +20,7 @@ const isAuthenticated = (fn) => {
 }
 
 const Mutation = {
-  //還沒寫
   groupAddUser: (_, {id,email}, {context, pubsub}) => {
-    /*
-    if(!context) throw new Error('Log in first!');
-    if(!find(groups, {id: id})) throw new Error('Cannot find group')
-    if(!find(authors,{email: email})) throw new Error('Cannot find user')
-    let EditedGroup = find(groups, {id: id})
-    if(EditedGroup.manager !== context.id) throw new Error('Access denied! Only the manager of the group can add new users');
-    let newGroupUser = find(authors,{email: email});
-    EditedGroup.users.push(newGroupUser.id);
-    newGroupUser.group.push(id);
-    return newGroupUser
-    */
     
     var GroupUsers = [];
     return groupModel.findOne({id:id}).then(result=>{
@@ -43,7 +31,7 @@ const Mutation = {
         return authorModel.findOne({email:email}).then(result=>{
           if(!result) throw new Error('Cannot find user')
           else{
-            if ( GroupUsers.some(e=>e===result.id)) throw new Error('User already in group');
+            if ( GroupUsers.some(e=>{return e===result.id})) throw new Error('User already in group');
             else{
               GroupUsers.push(result.id)
               groupModel.findOneAndUpdate({id:id},{$set:{users:GroupUsers}}).then(result=>{
@@ -57,6 +45,18 @@ const Mutation = {
     })
   },
   //
+  changeDefaultGroup:(_,{id},{context,pubsub}) => {
+    if(!context) throw new Error('Log in first!');
+    return groupModel.findOne({id:id}).then(result=>{
+      if ( !result.users.some(user=>{return user===context.id})) throw new Error('not in this group!')
+      else {
+        authorModel.findOneAndUpdate({id:context.id},{$set:{defaultGroup:id}}).then(result=>{
+          if(!result) throw new Error('no result');
+        })
+      }
+      return result;
+    })
+  },
   quitGroup: (_,{id}, {context,pubsub}) => {
     if(!context) throw new Error('Log in first!');
     /*
@@ -69,7 +69,9 @@ const Mutation = {
       EditedGroup = result;
       if ( !result)throw new Error('Cannot find group');
       else if (result.users.findIndex (user => user === context.id) === -1) throw new Error("You are not currently in this group")
-      else if (result.manager === context.id ) throw new Error("manager connot quit the group! Instead, you can pick a new manager and quit, or delete the group")
+      else if (result.manager === context.id ) {
+        throw new Error("manager connot quit the group! Instead, you can pick a new manager and quit, or delete the group")
+      }
       else{
         authorModel.findOne({id: context.id}).then((result=>{
           const userGroupDeletedIndex = result.group.findIndex(group => group === id)
@@ -506,25 +508,39 @@ const Mutation = {
     if (context) {
       throw new Error('Must log out first.');
     }
-    const _newAuthor = {
+    var _newAuthor = {
       id: v4(),
       email:email,
       name:name,
       password:password,
-      group: []
+      group: [],
+      defaultGroup: ''
     }
+    var _newGroup = {
+      id: v4(),
+      users: [_newAuthor.id],
+      events: [],
+      name:  `${_newAuthor.name} default group `,
+      manager: _newAuthor.id,
+    }
+    _newAuthor.defaultGroup = _newGroup.id;
+    _newAuthor.group.push(_newGroup.id)
     //console.log(_newAuthor)
     var newAuthor = new authorModel(_newAuthor);
-    authorModel.findOne({email:email}).then(
-      (result)=>{
+    var newGroup = new groupModel(_newGroup);
+    authorModel.findOne({email:email}).then((result)=>{
         if(result) {
           if (result.id !== context.id) throw new Error('Duplicate Email!')
         }
         else {
           newAuthor.save((err) => {
             if (err) {
-              //console.log(err);
-              return}
+              console.log(err);}
+            // saved!
+          })
+          newGroup.save((err) => {
+            if (err) {
+              console.log(err);}
             // saved!
           })
         }

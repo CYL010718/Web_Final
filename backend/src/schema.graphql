@@ -5,7 +5,7 @@
 		email: String!
     password: String!
     group(name: String): [Group]
-   # event: [Event] every event create by this user
+    defaultGroup: Group
   }
   type Group {
     id: ID!
@@ -70,6 +70,7 @@
      deleteEvent(eventID: ID! groupID: ID!): Event!
      updateEvent(data: UpdateEventInput!): Event!
      createGroup(data: CreateGroupInput!): Group!
+     changeDefaultGroup(id: ID!): Group!
      quitGroup(id: ID!): Group!
      groupAddUser(id: ID! email: String!): User
      deleteGroup(id: ID!): Group!

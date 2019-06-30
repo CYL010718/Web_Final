@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { gql } from "apollo-boost";
-import { Mutation, renderToStringWithData } from "react-apollo";
+import { Mutation } from "react-apollo";
+import { NavLink, Switch, Route,Redirect} from "react-router-dom";
 //import { hashHistory } from "react-router";
 
 import CURRENT_USER from '../../graphql/currentUser'
@@ -24,7 +24,8 @@ class SignUp extends Component{
   state = {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      Redirect:<div/>
   }
   handleSubmit = e =>{
     e.preventDefault();
@@ -34,7 +35,11 @@ class SignUp extends Component{
         email: this.state.email,
         password: this.state.password 
       }
-    });
+    }).then(data => {
+      this.setState(state => ({
+        Redirect: <Route exact path = "/SignUp" component = {() => <Redirect to = "/"/>}/>
+      }))
+    })
     this.setState(state => ({
         name: '',
         email: '',
@@ -58,7 +63,7 @@ class SignUp extends Component{
             <div style = {{height:'100%', width: '50%',backgroundColor: 'black', display:'flex',alignItems: 'center'}}>
                 <img src = {require(`../../img/pornhubLogo.jpeg`)} style = {{width:'100%'}}  alt="tem2"/>
             </div>
-            
+            {this.state.Redirect}
             <Container component="main" maxWidth="xs">
               <CssBaseline />
               <div>

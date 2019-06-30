@@ -68,6 +68,7 @@ const Query = {
           } else {
             ////console.log("No document matches the provided query.")
           }
+          console.log(result)
           return result
         })
         .catch(err => console.error(`Failed to find me: ${err}`))

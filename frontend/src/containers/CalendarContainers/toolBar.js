@@ -10,6 +10,7 @@ import { Query, Mutation } from 'react-apollo'
 import {SINGLE_EVENT_QUERY, CURRENT_USER} from '../../graphql/queries'
 import{UPDATE_USER_MUTATION, CREATE_EVENT_MUTATION, UPDATE_EVENT_MUTATION, DELETE_EVENT_MUTATION} from '../../graphql/mutations';
 import user from '../user'
+import LogOut from '../../components/logOut'
 
 class  Toolbar extends Component {
     constructor(props){
@@ -152,15 +153,18 @@ class  Toolbar extends Component {
             <div style={{width:'400px', height:'100%', position:'absolute', right:'0', top:'0',backgroundColor:'#f3e8e7', 
                         display: 'flex', flexDirection: 'row-reverse', justifyContent:'flex-start'}}>
                 <div style={{width:'50px', height:'100%',backgroundColor:'#344661', 
-                            display: 'flex', flexDirection: 'row-reverse', justifyContent:'flex-start'}}></div>
+                            display: 'flex', flexDirection: 'row-reverse', justifyContent:'flex-start'}}>
+                    <LogOut/>
+                </div>
                 <div style={{width:'350px', height:'100%', overflowX:'hidden', overflowY:'hidden'}}>
                 <div style={{width:'100%', height:'20%',padding:'5px 5px 0 5px', overflowY:'hidden'}}>
                         <div style={{width:'340px', height:'100%', display:'flex'}}>
                             
                             <Query query = {CURRENT_USER}>
                                 {({loading,data,error,subscribeToMore}) => {
+                                    console.log(data)
                                     if(loading||!data) return null
-
+                                    
                                    
                                     let {name,email,password} = data.me
                                     return(

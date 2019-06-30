@@ -179,3 +179,16 @@ export const CHANGE_MUTATION = gql`
   }
   }
 `
+
+export const CHANGE_DEFAULT_GROUP = gql`
+  mutation changeDefaultGroup(
+    $id: ID!
+  ) {
+    changeDefaultGroup(
+        id: $id
+    ) {
+      id
+      name
+  }
+  }
+`

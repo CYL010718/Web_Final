@@ -6,6 +6,7 @@ export const GROUP_EVENT_QUERY = gql`
     $id: ID!
   ){
     group(id: $id){
+      id
       event{
         id
         title
@@ -47,6 +48,17 @@ export const CURRENT_USER = gql`
   }
 `
 
+
+export const USER_DEFAULT_GROUP = gql`
+  query {
+    me {
+      id
+      defaultGroup{
+        id
+      }
+    }
+  }
+`
 
 export const GROUP_QUERY = gql`
   query {
