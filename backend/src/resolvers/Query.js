@@ -38,7 +38,7 @@ const Query = {
             ////console.log(args.id)
             throw new Error("Cannot find event1")
           }
-          console.log(result)
+          //console.log(result)
           return result
         })
         .catch(err => console.error(`Cannot find event2`))
@@ -66,7 +66,7 @@ const Query = {
           } else {
             ////console.log("No document matches the provided query.")
           }
-          console.log(result)
+          //console.log(result)
           return result
         })
         .catch(err => console.error(`Failed to find me: ${err}`))

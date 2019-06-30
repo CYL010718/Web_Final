@@ -106,7 +106,7 @@ export default function MaterialTableDemo(props){
                                       new Promise(resolve => {
                                           resolve();
                                           if(data[data.indexOf(oldData)].id === props.defaultGroup) {
-                                            console.log(data[data.indexOf(oldData)].id)
+                                            //console.log(data[data.indexOf(oldData)].id)
                                             alert('Cannot delete your default group! Choose another group for default first')
                                           }
                                           else{

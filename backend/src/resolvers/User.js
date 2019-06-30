@@ -37,7 +37,7 @@ const User = {
    defaultGroup: (parent,args) => {
       return groupModel.findOne({id:parent.defaultGroup}).then(result=>{
          if( !result)throw new Error('no defaultGroup')
-         console.log(result);
+         //console.log(result);
          return result;
       })
    }

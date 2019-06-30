@@ -226,7 +226,7 @@ class CalTable extends Component{
       )
     }
     render(){
-      console.log("render Table")
+      //console.log("render Table")
         let dayCell = [];
        // let max = DaysofMonth(lastMonth);
         const tem = new Date(this.state.thisYear,this.state.lastMonth,this.state.firstVisibleDate);
@@ -280,7 +280,7 @@ class CalTable extends Component{
             <Query query = {GROUP_USER_QUERY} variables = {{id:this.props.groupID}}>
             
               {({loading,error,data,subscribeToMore}) => {
-                console.log(this.props.groupID)
+                //console.log(this.props.groupID)
                 if(loading) return null;
                 if(error) console.log("error")
                 let users = data.group.user
@@ -290,7 +290,7 @@ class CalTable extends Component{
                   {({loading,data,error,subscribeToMore})=>{
                     if(loading) return null;
                     if(error) console.log("error")
-                    console.log(data)
+                    //console.log(data)
                     let manager = data.group.manager;
                     return  <Manager groupID = {this.props.groupID} manager={manager} users={users}/>
                   }}         

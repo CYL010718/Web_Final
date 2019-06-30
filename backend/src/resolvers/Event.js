@@ -10,7 +10,7 @@ const groups = db.groups
 
 const Event = {
   author: (parent, _, {context}) =>{
-    console.log(parent)
+    //(parent)
     return authorModel.findOne({ id: context.id }).then(result => {
     if ( !result) throw new Error ( 'no result author')
     else return result

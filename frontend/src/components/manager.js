@@ -37,11 +37,11 @@ export default function SimpleSelect(props) {
       ...oldValues,
       [event.target.name]: event.target.value,
     }));
-    console.log('new manager id:'+event.target.value)
+    //console.log('new manager id:'+event.target.value)
   }
 
   var renderUsers = () =>{
-    console.log(props)
+    //console.log(props)
     return props.users.map(user => {
         if ( user.id !== props.manager.id) return(
             <MenuItem key={user.id} value={user.id}>{user.email}</MenuItem>
@@ -64,7 +64,7 @@ export default function SimpleSelect(props) {
                     value={values.age}
                     onChange={event => {
                       setValues(oldValues => ({ ...oldValues,[event.target.name]: event.target.value,}));
-                      console.log('new manager id:'+event.target.value)
+                      //console.log('new manager id:'+event.target.value)
                       groupChangeManager({
                         variables: {
                           id: props.groupID,

@@ -33,7 +33,7 @@ const Group = {
                 if(!result)throw new Error('Cannot find user')
                 else{
                     if (!parent.users.find(id => id === result.id)) throw new Error('User not in this group')
-                    console.log([result])
+                    //console.log([result])
                     return [result]
                 }
             })

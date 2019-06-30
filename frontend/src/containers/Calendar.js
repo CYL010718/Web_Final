@@ -48,7 +48,7 @@ class Calendar extends Component {
             {({loading,error,data,subscribeToMore})=>{      
                if(loading) return null
                if(error) console.log("error");
-              console.log(data)
+              //console.log(data)
 
                if(!eventUnsubscribe){
                
@@ -101,8 +101,6 @@ class Calendar extends Component {
                   
                 }
                
-               console.log(data)
-               console.log(events);
                //return <div>{table}</div>
               return  <CalTable defaultGroupID = {this.state.defaultGroupID} groupID = {this.state.groupID}  handleEventChange = {this.handleEventChange} events = {events}></CalTable>
   
@@ -114,13 +112,11 @@ class Calendar extends Component {
             if(loading) return null;
            // console.log(data);
             let groups = data.me.group;
-            console.log('2');
       
             if(!groupUnsubscribe){
                  groupUnsubscribe = subscribeToMore({
                  document: GROUP_SUBSCRIPTION, 
                  updateQuery: (prev, { subscriptionData }) => {
-                      console.log('1');
                       if(!subscriptionData.data){
                         return prev
                       }
@@ -166,7 +162,7 @@ class Calendar extends Component {
                       }
                  }})
             }
-            console.log(groups);
+            //console.log(groups);
             return <Toolbar  defaultGroup = {this.props.defaultGroup}  groups = {groups} handleGroupChange =  {this.handleGroupChange}  handleDefaultGroupChange = {this.handleDefaultGroupChange} eventChange = {this.state.eventChange} groupID = {this.state.groupID} eventID = {this.state.eventID} resetEventChange = {this.resetEventChange}/>;
           }}
 

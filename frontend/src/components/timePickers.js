@@ -21,7 +21,7 @@ export default function MaterialUIPickers(props) {
   function handleDateChange(date) {
     props.settime(date)
    // return dat
-    console.log(date);
+    //console.log(date);
   }
   
 

@@ -121,7 +121,7 @@ class DayScheduler extends React.Component {
                          width:component_width-8+'px', display:'flex', opacity:0.5, 
                          borderRadius:'10px', overflowX:'scroll',padding:'3px',cursor:'pointer'}}
                  id = {event.id}
-                 onClick={(e)=>{console.log(e.target.id); this.props.handleEventChange(e.target.id)}}>{event.title}</div>
+                 onClick={(e)=>{this.props.handleEventChange(e.target.id)}}>{event.title}</div>
           </List>
         </div>
       )
@@ -164,7 +164,7 @@ class DayScheduler extends React.Component {
   }
 
   render(){
-    console.log("render dayscheduler")
+    //console.log("render dayscheduler")
     return (
       <div style={{backgroundColor:'#fff4fb', width:'600px', height:'80vh',borderRadius:'50px', overflowX:'scroll'}}>
         <div style={{padding:'12px 0px', width:'600px', display: 'flex', justifyContent: 'center',color:'grey'}}>

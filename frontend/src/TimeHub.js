@@ -24,7 +24,7 @@ class TimeHub extends Component{
                 {({loading,data,error}) => {
                     if(loading) return null
                     if(error) console.log("error")
-                    console.log(data)
+                    //console.log(data)
                     let defaultGroup = data.me.defaultGroup.id;
                     return(
                             <Route path = '/main' render = {() => <Calendar defaultGroup ={defaultGroup} handleDefaultGroupChange = {this.handleDefaultGroupChange}/>}/>

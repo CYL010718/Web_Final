@@ -29,14 +29,14 @@ class SignIn extends Component{
 }
   handleSubmit = e =>{
     e.preventDefault();
-    console.log(this.state.email)
+    //console.log(this.state.email)
     this.login({
       variables: {
         email: this.state.email,
         password: this.state.password
       }
     }).then(data => {
-        console.log(localStorage.getItem("x-token"))
+        //console.log(localStorage.getItem("x-token"))
         this.setState(state => ({
           Redirect: <Route exact path = "/" component = {() => <Redirect to = "/main"/>}/>
         }))
@@ -57,20 +57,20 @@ class SignIn extends Component{
         mutation={LOGIN}
         refetchQueries={data => {
           localStorage.setItem("x-token", data.data.login.token);
-          console.log({ query: CURRENT_USER }.data);
+          //console.log({ query: CURRENT_USER }.data);
           return [{ query: CURRENT_USER }];
         }}
         awaitRefetchQueries={true}
       >
         {(login, { data, loading, error }) => {
           this.login = login;
-          console.log(data)
+          //console.log(data)
           if (error) {
             /*this.setState(state => ({
               Redirect: <Route exact path = "/" component = {() => <Redirect to = "/"/>}/>
             }))*/
            // hashHistory.push("/");
-            console.log("login error")
+            //console.log("login error")
           }
   
           return (
@@ -126,10 +126,6 @@ class SignIn extends Component{
                             password: e.target.value
                         })
                     }}/>
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                  />
                   <Button
                     //type="submit"
                     fullWidth
@@ -140,11 +136,6 @@ class SignIn extends Component{
                     Sign In
                   </Button>
                   <Grid container>
-                    <Grid item xs>
-                      <Link href="#" variant="body2">
-                        Forgot password?
-                      </Link>
-                    </Grid>
                     <Grid item>
                       
                       <NavLink to = "/SignUp" variant="body2">

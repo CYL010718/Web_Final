@@ -139,9 +139,9 @@ const Mutation = {
         return authorModel.findOne({id:userID}).then(result=>{
           if ( !result)throw new Error('Cannot find user');
           else{
-            console.log(userID)
+            //(userID)
             groupModel.findOneAndUpdate({id:id},{$set:{manager:userID}}).then(result=>{
-              console.log(result)
+              //console.log(result)
               if(!result) throw new Error('Cannot find group');
             })
             
@@ -175,18 +175,18 @@ const Mutation = {
       currentUser_group = result.group
       currentUser_group.push(id);
     }).then(()=>{
-      console.log(currentUser_group)
+      //(currentUser_group)
       authorModel.findOneAndUpdate({id:context.id},{$set:{group:currentUser_group}}).then((result=>{
-        if(result) console.log(result);
+        if(result) c//onsole.log(result);
         else{
-          console.log('no result')
+          //console.log('no result')
         }
       })).catch(err=>{console.log(err)})
     }).then(()=>{
       var newGroup  = new groupModel(_newGroup)
       newGroup.save((err) => {
         if (err) {
-          console.log(err);
+          //console.log(err);
           return}
         // saved!
       })
@@ -277,7 +277,7 @@ const Mutation = {
               modifiedUser_groups.splice(userGroupDeletedIndex,1);
             }
           }).then(()=>{
-              console.log(modifiedUser_groups)
+              //console.log(modifiedUser_groups)
               authorModel.findOneAndUpdate({id:result.users[i]},{$set:{group:modifiedUser_groups}}).then(result=>{
               if(!result) throw new Error(`error`)
             })
@@ -313,7 +313,7 @@ const Mutation = {
     groupModel.findOne({id:groupID})
     .then(result => {
       if(result) {
-        console.log(`Successfully found group: ${result}.`)
+        //console.log(`Successfully found group: ${result}.`)
       } 
       else {
         //console.log(args.id)
@@ -324,8 +324,9 @@ const Mutation = {
     })
     .then(
       ()=>{;
-        console.log(modifiedGroup.events)
-        groupModel.findOneAndUpdate({id:groupID},{$set:{events:modifiedGroup.events}}).then(result=>{console.log(result)})
+        //(modifiedGroup.events)
+        groupModel.findOneAndUpdate({id:groupID},{$set:{events:modifiedGroup.events}}).then(result=>{if(!result)console.log(result)
+        })
       }
     )
     
@@ -424,7 +425,7 @@ const Mutation = {
       return eventModel.findOne({id:eventID}).then( (result) =>{
         if ( result.authorID !== context.id) throw new Error(`Access Denied! Only the author of the event can delete it `);
         else{
-          groupModel.findOneAndUpdate({id:groupID},{$set:{events:modifiedGroup.events}}).then((result)=>console.log(result))
+          groupModel.findOneAndUpdate({id:groupID},{$set:{events:modifiedGroup.events}}).then((result)=>{if(!result)console.log(result)})
           pubsub.publish('event', {
             event:{
               mutation: 'DELETED',

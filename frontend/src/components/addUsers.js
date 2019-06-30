@@ -37,7 +37,7 @@ export default function CustomizedInputBase(props) {
 
   var handleAddButtonClick = () =>{
     var tem = document.getElementById('AddUserInputArea').value;
-    console.log(tem)
+    //console.log(tem)
   }
 
   return (
@@ -53,7 +53,7 @@ export default function CustomizedInputBase(props) {
           />
           <IconButton color="primary" className={classes.iconButton} aria-label="Directions" onClick = {() => {
             var tem = document.getElementById('AddUserInputArea').value;
-            console.log(tem)
+            //console.log(tem)
             groupAddUser({
               variables:{
                 id: props.groupID,

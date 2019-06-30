@@ -25,7 +25,7 @@ class  Toolbar extends Component {
     }
 
     setNewStartTime = (time) => {
-        console.log(time);
+        //console.log(time);
         this.setState({startTime:time})
     }
 
@@ -143,12 +143,12 @@ class  Toolbar extends Component {
         var name = document.getElementById('textFieldUserName').value;
         var email = document.getElementById('textFieldUserEmail').value;
         var password = document.getElementById('InputUserPassword').value;
-        console.log({name,email,password});
+        //console.log({name,email,password});
     }*/
 
 
     render(){
-       console.log("render toolbar")
+       //console.log("render toolbar")
         return (
             <div style={{width:'400px', height:'100%', position:'absolute', right:'0', top:'0',backgroundColor:'#f3e8e7', 
                         display: 'flex', flexDirection: 'row-reverse', justifyContent:'flex-start'}}>
@@ -162,7 +162,7 @@ class  Toolbar extends Component {
                             
                             <Query query = {CURRENT_USER}>
                                 {({loading,data,error,subscribeToMore}) => {
-                                    console.log(data)
+                                    //console.log(data)
                                     if(loading||!data) return null
                                     
                                    
@@ -240,7 +240,7 @@ class  Toolbar extends Component {
                                     this.setNewEndTime(end);
                                 }
                                 
-                                console.log(start)
+                                //console.log(start)
                                 return(
                                     <div>
                                         <TextField row='1' placeholder='Title' id='Title' defaultValue = {title}/>

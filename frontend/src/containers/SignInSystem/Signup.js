@@ -48,14 +48,14 @@ class SignUp extends Component{
     // hashHistory.push("/")
   }
   render(){
-    console.log('hi');
+    //console.log('hi');
     return (
       <Mutation mutation={SIGNUP}>
         {(signup, { data, loading, error }) => {
           this.signup = signup;
           if (error) {
             //hashHistory.push("/login");
-            console.log("login error")
+            //console.log("login error")
           }
   
           return (
@@ -125,10 +125,6 @@ class SignUp extends Component{
                             password: e.target.value
                         })
                     }}/>
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                  />
                   <Button
                     type="submit"
                     fullWidth
