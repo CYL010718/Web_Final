@@ -34,20 +34,28 @@ frontend install中有機會會有warning，可以先忽略他...
 2. events:
 > 每個group中都有events。Events由group users共同編輯，每個user都可以新增events在group中。<br/>
 > Ｇroup 中的events雖然是共同編輯，但group users的權限僅止於查看events，以下是只有event的持有者才有權限做的事（位於右下角區域）：
-> - change event name, times, body
-> - delete event
+> - change event name, times, body（須先點擊選取event)
+> - delete event (須先點擊選取event)
 
 3. users:
 > 右上角區域是user profile。若要編輯，請按右上角的edit icon (pen)。<br/>
 > p.s.請滑至最下方，有個save icon ，按下去才有save喲～～(password更改也在這裡)
 
+4. calendar:
+> 在左方的calendar中，可以點擊查看每個event，這也是選取event的唯一方法。除了月曆，點擊每個日期的數字，都可以進到當天的行事曆。行事曆可以滑動，行事曆中的events亦可以點擊。今日的行事曆中，可以看到一條綠色的細線，代表現在時刻。
+
 ## 使用與參考之框架/模組/原始碼
 
+使用：
 1. React : frontend
 2. Apollo Client: 處理 client 端和 GraphQL schema的連接
 3. GrphQL 定義資料查詢
 4. Node.js ：backend
 5. MongoDB : database
+
+參考
+1. react-big-calendar
+https://github.com/onursimsek94/react-big-calendar
 
 ## 專題製作心得
 
