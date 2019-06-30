@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -31,21 +30,15 @@ export default function SimpleSelect(props) {
     name: 'hai',
   });
 
-
-  function handleChange(event) {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-    //console.log('new manager id:'+event.target.value)
-  }
-
   var renderUsers = () =>{
     //console.log(props)
     return props.users.map(user => {
         if ( user.id !== props.manager.id) return(
             <MenuItem key={user.id} value={user.id}>{user.email}</MenuItem>
         )
+        else{
+          return <div key='nonenone'></div>
+        }
     })
   }
 

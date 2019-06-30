@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function TextFields(props) {
   const classes = useStyles();
-  const defaultValue = props.defaultValue
 
   return (
     <form className={classes.container} noValidate autoComplete="off" key = {props.defaultValue} >

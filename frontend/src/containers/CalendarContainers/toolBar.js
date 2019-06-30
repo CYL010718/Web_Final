@@ -9,7 +9,6 @@ import Group from '../../components/group'
 import { Query, Mutation } from 'react-apollo'
 import {SINGLE_EVENT_QUERY, CURRENT_USER} from '../../graphql/queries'
 import{UPDATE_USER_MUTATION, CREATE_EVENT_MUTATION, UPDATE_EVENT_MUTATION, DELETE_EVENT_MUTATION} from '../../graphql/mutations';
-import user from '../user'
 import LogOut from '../../components/logOut'
 
 class  Toolbar extends Component {

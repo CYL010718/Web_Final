@@ -1,4 +1,4 @@
-import React, {Component}from 'react';
+import React from 'react';
 import MaterialTable from 'material-table';
 import {CREATE_GROUP_MUTATION, EDIT_GROUP_NAME_MUTATION,DELETE_GROUP_MUTATION,GROUP_QUIT_MUTATION,CHANGE_DEFAULT_GROUP} from '../graphql/mutations'
 import './fontsForGroups.css'
@@ -14,7 +14,7 @@ export default function MaterialTableDemo(props){
       name: group.name};
   })
   
-  const [state, setState] = React.useState({
+  const [state] = React.useState({
     columns: [
       { title: 'Name', field: 'name' },
     ],

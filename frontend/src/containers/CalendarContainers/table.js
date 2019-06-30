@@ -13,7 +13,7 @@ import Picker from "../../components/Picker"
 import AddUsers from "../../components/addUsers"
 import Manager from '../../components/manager'
 import DefaultGroupBulb from "../../components/defaultGroupBulb"
-import { Query, Mutation } from 'react-apollo'
+import { Query} from 'react-apollo'
 import {GROUP_USER_QUERY, GROUP_MANAGER_QUERY} from '../../graphql/queries'
 
 let DaysofMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
